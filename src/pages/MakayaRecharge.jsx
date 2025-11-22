@@ -1,58 +1,130 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Battery, Zap, MapPin, TrendingUp, DollarSign, Activity, AlertCircle, CheckCircle, Clock, Calendar, ArrowLeft, Info, CreditCard, TrendingDown } from 'lucide-react';
-import { rechargeData } from '../data/rechargeData';
+import { 
+  BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
+} from 'recharts';
+import { 
+  Battery, Zap, MapPin, TrendingUp, DollarSign, Activity, AlertCircle, 
+  CheckCircle, Clock, CreditCard, Users, Target, Lightbulb, AlertTriangle, ChevronRight, X
+} from 'lucide-react';
+import { rechargeDataFinal } from '../data/rechargeDataFinal';
 
 const MakayaRecharge = () => {
   const [selectedStation, setSelectedStation] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
 
+  const { 
+    overview, periodesHoraires, tarifsBornes, stations, performanceBornes,
+    abonnements, kpis, alertes, insights, previsions, tendancesHoraires
+  } = rechargeDataFinal;
+
   const formatCurrency = (value) => new Intl.NumberFormat('fr-FR').format(value) + ' FCFA';
   const formatNumber = (value) => new Intl.NumberFormat('fr-FR').format(value);
 
-  const getStatusColor = (status) => {
-    const colors = { operational: 'bg-green-500', maintenance: 'bg-yellow-500', 'hors-service': 'bg-red-500' };
-    return colors[status] || 'bg-gray-500';
-  };
-
-  const getStatusText = (status) => {
-    const texts = { operational: 'Opérationnelle', maintenance: 'Maintenance', 'hors-service': 'Hors service' };
-    return texts[status] || status;
-  };
-
-  const getPeriodeColor = (periode) => {
-    const colors = { Creuses: 'bg-blue-500/20 text-blue-400 border-blue-500/50', Pleines: 'bg-green-500/20 text-green-400 border-green-500/50', Pointe: 'bg-orange-500/20 text-orange-400 border-orange-500/50' };
-    return colors[periode] || 'bg-slate-500/20 text-slate-400';
-  };
+  const COLORS = { blue: '#3b82f6', green: '#10b981', yellow: '#eab308', red: '#ef4444', purple: '#8b5cf6', orange: '#f97316' };
 
   const tabs = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: Activity },
     { id: 'tarifs', label: 'Tarification', icon: CreditCard },
-    { id: 'bornes', label: 'Types de Bornes', icon: Zap },
-    { id: 'expansion', label: 'Expansion', icon: TrendingUp }
+    { id: 'bornes', label: 'Performance', icon: Zap },
+    { id: 'tendances', label: 'Tendances', icon: Clock },
+    { id: 'insights', label: 'Insights', icon: Target }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
       <div className="max-w-7xl mx-auto">
+        
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <a href="/" className="p-2 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition"><ArrowLeft className="w-5 h-5" /></a>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-2xl flex items-center justify-center shadow-2xl">
+              <Zap className="w-10 h-10 text-white" />
+            </div>
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text">⚡ Makaya Recharge</h1>
-              <p className="text-slate-400 text-lg">Réseau de Bornes de Recharge Électrique</p>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 text-transparent bg-clip-text">
+                Makaya Recharge
+              </h1>
+              <p className="text-slate-400 text-lg">Réseau Intelligent de Stations de Recharge</p>
+            </div>
+          </div>
+
+          {/* Alertes */}
+          {alertes.critiques && alertes.critiques.length > 0 && (
+            <div className="bg-red-900/30 border-l-4 border-red-500 rounded-xl p-4 mb-6">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="text-red-400 flex-shrink-0 mt-1" size={24} />
+                <div className="flex-1">
+                  <h3 className="font-bold text-red-300 mb-2">🚨 Alertes Critiques</h3>
+                  {alertes.critiques.map((alert, idx) => (
+                    <div key={idx} className="text-red-200 text-sm mb-2">
+                      <div className="font-semibold">{alert.message}</div>
+                      <div className="text-red-300 text-xs">Impact: {alert.impact}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* KPIs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-xl p-6 border border-blue-500/30 hover:shadow-xl transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <DollarSign className="w-8 h-8 text-blue-400" />
+                <span className="text-xs bg-blue-500/30 px-2 py-1 rounded-full text-blue-300">Mensuel</span>
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{(overview.revenusMensuel / 1000000).toFixed(2)}M</div>
+              <div className="text-blue-300 text-sm">CA FCFA/mois</div>
+              <div className="mt-2 text-sm text-green-400">▲ {kpis.financiers.tauxMarge}% marge</div>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-xl p-6 border border-green-500/30 hover:shadow-xl transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <Battery className="w-8 h-8 text-green-400" />
+                <span className="text-xs bg-green-500/30 px-2 py-1 rounded-full text-green-300">Réseau</span>
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{overview.tauxUtilisation}%</div>
+              <div className="text-green-300 text-sm">{overview.bornesActives}/{overview.totalBornes} bornes</div>
+              <div className="mt-2 text-sm text-green-400">✓ Excellent</div>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 rounded-xl p-6 border border-purple-500/30 hover:shadow-xl transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <Users className="w-8 h-8 text-purple-400" />
+                <span className="text-xs bg-purple-500/30 px-2 py-1 rounded-full text-purple-300">Actifs</span>
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{formatNumber(overview.clientsActifs)}</div>
+              <div className="text-purple-300 text-sm">{overview.sessionsJour} sessions/jour</div>
+              <div className="mt-2 text-sm text-purple-400">⭐ {overview.satisfaction}/5</div>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-400/20 to-teal-500/20 rounded-xl p-6 border border-green-400/30 hover:shadow-xl transition-all">
+              <div className="flex items-center justify-between mb-3">
+                <Activity className="w-8 h-8 text-green-300" />
+                <span className="text-xs bg-green-400/30 px-2 py-1 rounded-full text-green-200">Impact</span>
+              </div>
+              <div className="text-3xl font-bold text-white mb-1">{overview.co2Evite.mensuel}t</div>
+              <div className="text-green-300 text-sm">{overview.co2Evite.annuel}t CO₂/an</div>
+              <div className="mt-2 text-sm text-green-400">🌱 {Math.round(overview.co2Evite.annuel * 1.5)} arbres</div>
             </div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-slate-800/50 rounded-2xl p-2 mb-6">
+        <div className="bg-slate-800/50 rounded-2xl p-2 mb-6 border border-slate-700/50">
           <div className="flex gap-2 overflow-x-auto">
             {tabs.map(tab => {
               const Icon = tab.icon;
               return (
-                <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${activeTab === tab.id ? 'bg-yellow-500/20 text-yellow-400' : 'text-slate-400 hover:text-white'}`}>
+                <button 
+                  key={tab.id} 
+                  onClick={() => setActiveTab(tab.id)} 
+                  className={`flex items-center gap-2 px-4 py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${
+                    activeTab === tab.id 
+                      ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg' 
+                      : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                  }`}
+                >
                   <Icon className="w-4 h-4" />{tab.label}
                 </button>
               );
@@ -60,303 +132,279 @@ const MakayaRecharge = () => {
           </div>
         </div>
 
-        {/* OVERVIEW */}
-        {activeTab === 'overview' && (
-          <div className="space-y-6">
-            {/* KPIs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-6 border border-slate-700/50 hover:shadow-xl transition-all">
-                <div className="p-3 bg-yellow-500/20 rounded-xl w-fit mb-3"><MapPin className="w-6 h-6 text-yellow-400" /></div>
-                <h3 className="text-slate-400 text-sm mb-1">Stations</h3>
-                <p className="text-3xl font-bold">{rechargeData.networkMetrics.totalStations}</p>
+        {/* Content */}
+        <div className="min-h-[400px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-6">
+              {/* Périodes Tarifaires */}
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Clock className="w-6 h-6 text-blue-400" />Système Tarifaire
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {Object.entries(periodesHoraires).map(([key, periode]) => (
+                    <div key={key} className="p-5 rounded-xl border-2 border-slate-700 hover:border-blue-500 transition-all">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="font-bold text-lg">
+                          {key === 'heuresCreuses' ? '🌙 Creuses' : key === 'heuresPleines' ? '☀️ Pleines' : '🔥 Pointe'}
+                        </span>
+                      </div>
+                      <div className="text-sm text-slate-400 mb-3">{periode.periode}</div>
+                      <div className="flex justify-between mb-3">
+                        <div><div className="text-2xl font-bold text-blue-400">{periode.prixMoyenKWh}</div><div className="text-xs text-slate-500">FCFA/kWh</div></div>
+                        <div className="text-right"><div className="text-xl font-bold text-green-400">{periode.margePourcentage.toFixed(1)}%</div><div className="text-xs text-slate-500">marge</div></div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-slate-700/50 p-2 rounded"><div className="text-slate-400">Sessions</div><div className="font-semibold">{periode.pourcentageSessions}%</div></div>
+                        <div className="bg-slate-700/50 p-2 rounded"><div className="text-slate-400">Rev/j</div><div className="font-semibold">{(periode.revenuMoyen / 1000).toFixed(0)}K</div></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-6 border border-slate-700/50 hover:shadow-xl transition-all">
-                <div className="p-3 bg-green-500/20 rounded-xl w-fit mb-3"><Zap className="w-6 h-6 text-green-400" /></div>
-                <h3 className="text-slate-400 text-sm mb-1">Bornes Actives</h3>
-                <p className="text-3xl font-bold">{rechargeData.networkMetrics.bornesActives}/{rechargeData.networkMetrics.totalBornes}</p>
+
+              {/* Stations */}
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <MapPin className="w-6 h-6 text-red-400" />Réseau ({stations.length} stations)
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {stations.map((station) => (
+                    <div key={station.id} onClick={() => setSelectedStation(station)} className="bg-slate-900/50 rounded-xl p-5 border border-slate-700 hover:border-blue-500 transition-all cursor-pointer">
+                      <div className="flex items-start justify-between mb-4">
+                        <div><h4 className="font-bold text-white text-lg">{station.nom}</h4><p className="text-sm text-slate-400">{station.localisation.zone}</p></div>
+                        <div className="text-right"><div className="text-xl font-bold text-blue-400">{(station.performance.revenuJour / 1000).toFixed(1)}K</div><div className="text-xs text-slate-500">FCFA/j</div></div>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">📊 {station.performance.tauxUtilisation}%</span>
+                        <span className="text-slate-400">⭐ {station.performance.satisfaction}</span>
+                        <ChevronRight size={18} className="text-slate-600" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-6 border border-slate-700/50 hover:shadow-xl transition-all">
-                <div className="p-3 bg-blue-500/20 rounded-xl w-fit mb-3"><Activity className="w-6 h-6 text-blue-400" /></div>
-                <h3 className="text-slate-400 text-sm mb-1">Utilisation</h3>
-                <p className="text-3xl font-bold">{rechargeData.networkMetrics.tauxUtilisationMoyen}%</p>
-              </div>
-              <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-6 border border-slate-700/50 hover:shadow-xl transition-all">
-                <div className="p-3 bg-purple-500/20 rounded-xl w-fit mb-3"><DollarSign className="w-6 h-6 text-purple-400" /></div>
-                <h3 className="text-slate-400 text-sm mb-1">CA Mensuel</h3>
-                <p className="text-3xl font-bold">{formatNumber(rechargeData.networkMetrics.revenusMois / 1000000)}M</p>
+
+              {/* Performance */}
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Battery className="w-6 h-6 text-green-400" />Performance Bornes
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {Object.entries(performanceBornes).map(([type, data]) => (
+                    <div key={type} className="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-bold">{type === 'slow7kW' ? '🐢 7kW' : type === 'fast22kW' ? '⚡ 22kW' : '🚀 50kW'}</span>
+                        <span className="text-xs text-slate-500">ROI {data.ROI}ans</span>
+                      </div>
+                      <div className="mb-3">
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-slate-400">Utilisation</span>
+                          <span className="font-semibold text-blue-400">{data.tauxUtilisation}%</span>
+                        </div>
+                        <div className="w-full bg-slate-700 rounded-full h-2">
+                          <div className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style={{ width: `${data.tauxUtilisation}%` }} />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="bg-slate-800/50 p-2 rounded"><div className="text-slate-400">Rev/j</div><div className="font-bold text-green-400">{(data.revenuTotal / 1000).toFixed(0)}K</div></div>
+                        <div className="bg-slate-800/50 p-2 rounded"><div className="text-slate-400">Marge</div><div className="font-bold text-purple-400">{data.margePourcentage.toFixed(1)}%</div></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          )}
 
-            {/* Stations */}
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6">Stations de Recharge</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {rechargeData.stations.map(station => (
-                  <div key={station.id} className="bg-slate-900/50 rounded-xl p-5 border border-slate-700/50 hover:border-yellow-500/50 transition-all">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="text-lg font-bold text-white">{station.name}</h4>
-                        <p className="text-sm text-slate-400">{station.location.address}</p>
+          {activeTab === 'tarifs' && (
+            <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <CreditCard className="w-6 h-6 text-yellow-400" />Grille Tarifaire
+              </h3>
+              {Object.entries(tarifsBornes).map(([type, borne]) => (
+                <div key={type} className="mb-6">
+                  <h4 className="text-xl font-bold mb-4">
+                    {type === 'slow7kW' && '🐢 Lente 7kW'}
+                    {type === 'fast22kW' && '⚡ Rapide 22kW'}
+                    {type === 'ultra50kW' && '🚀 Ultra 50kW'}
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {Object.entries(borne).filter(([key]) => key.includes('heures')).map(([periode, tarif]) => (
+                      <div key={periode} className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
+                        <div className="text-sm font-semibold mb-3">
+                          {periode === 'heuresCreuses' && '🌙 Creuses'}
+                          {periode === 'heuresPleines' && '☀️ Pleines'}
+                          {periode === 'heuresPointe' && '🔥 Pointe'}
+                        </div>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex justify-between"><span className="text-slate-400">Prix:</span><span className="font-bold text-blue-400">{tarif.prixKWh} FCFA</span></div>
+                          <div className="flex justify-between"><span className="text-slate-400">Marge:</span><span className="font-bold text-green-400">{tarif.marge} FCFA</span></div>
+                          <div className="flex justify-between border-t border-slate-700 pt-2"><span>Marge %:</span><span className="font-bold text-yellow-400">{tarif.margePct}%</span></div>
+                        </div>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(station.status)}`}></span>
-                    </div>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Bornes:</span>
-                        <span className="text-white font-semibold">{station.bornesDisponibles}/{station.bornes}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Utilisation:</span>
-                        <span className="text-green-400 font-semibold">{station.utilisation}%</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">CA 24h:</span>
-                        <span className="text-purple-400 font-semibold">{formatCurrency(station.revenus24h)}</span>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {station.typesBornes.map((type, i) => (
-                        <span key={i} className="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">{type.type} x{type.count}</span>
-                      ))}
-                    </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          )}
 
-            {/* Graphique Utilisation */}
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6">Utilisation Horaire (Aujourd'hui)</h3>
+          {activeTab === 'bornes' && (
+            <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+              <h3 className="text-2xl font-bold mb-6">Performance Détaillée</h3>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={rechargeData.hourlyUsage}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                  <XAxis dataKey="hour" stroke="#94a3b8" />
-                  <YAxis stroke="#94a3b8" />
-                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #eab308' }} />
-                  <Bar dataKey="sessions" fill="#eab308" name="Sessions" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        )}
-
-        {/* TARIFS */}
-        {activeTab === 'tarifs' && (
-          <div className="space-y-6">
-            {/* Grille Tarifaire */}
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2"><CreditCard className="w-6 h-6 text-yellow-400" />Grille Tarifaire par Période</h3>
-              
-              {/* Périodes */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-blue-900/30 rounded-xl p-5 border border-blue-500/30">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-xl font-bold text-blue-400">Heures Creuses</h4>
-                    <Clock className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <p className="text-sm text-slate-300 mb-4">{rechargeData.tarifPeriodes.creuses.heures}</p>
-                  <div className="space-y-2">
-                    <div className="flex justify-between"><span className="text-slate-400">Achat électricité:</span><span className="text-white font-bold">80 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">AC (7/22kW):</span><span className="text-green-400 font-bold">150 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 50kW:</span><span className="text-green-400 font-bold">200 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 150kW:</span><span className="text-green-400 font-bold">250 FCFA/kWh</span></div>
-                  </div>
-                </div>
-
-                <div className="bg-green-900/30 rounded-xl p-5 border border-green-500/30">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-xl font-bold text-green-400">Heures Pleines</h4>
-                    <Activity className="w-6 h-6 text-green-400" />
-                  </div>
-                  <p className="text-sm text-slate-300 mb-4">{rechargeData.tarifPeriodes.pleines.heures}</p>
-                  <div className="space-y-2">
-                    <div className="flex justify-between"><span className="text-slate-400">Achat électricité:</span><span className="text-white font-bold">95 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">AC (7/22kW):</span><span className="text-green-400 font-bold">200 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 50kW:</span><span className="text-green-400 font-bold">250 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 150kW:</span><span className="text-green-400 font-bold">300 FCFA/kWh</span></div>
-                  </div>
-                </div>
-
-                <div className="bg-orange-900/30 rounded-xl p-5 border border-orange-500/30">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-xl font-bold text-orange-400">Heures Pointe</h4>
-                    <TrendingUp className="w-6 h-6 text-orange-400" />
-                  </div>
-                  <p className="text-sm text-slate-300 mb-4">{rechargeData.tarifPeriodes.pointe.heures}</p>
-                  <div className="space-y-2">
-                    <div className="flex justify-between"><span className="text-slate-400">Achat électricité:</span><span className="text-white font-bold">110 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">AC (7/22kW):</span><span className="text-green-400 font-bold">250 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 50kW:</span><span className="text-green-400 font-bold">300 FCFA/kWh</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">DC 150kW:</span><span className="text-green-400 font-bold">350 FCFA/kWh</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Marges Détaillées */}
-              <div className="bg-slate-900/50 rounded-xl p-6 mb-6">
-                <h4 className="text-xl font-bold mb-4">Marges par Type et Période</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-slate-700">
-                        <th className="text-left py-3 px-4 text-slate-400">Type Borne</th>
-                        <th className="text-left py-3 px-4 text-slate-400">Période</th>
-                        <th className="text-right py-3 px-4 text-slate-400">Achat</th>
-                        <th className="text-right py-3 px-4 text-slate-400">Vente</th>
-                        <th className="text-right py-3 px-4 text-slate-400">Marge</th>
-                        <th className="text-right py-3 px-4 text-slate-400">Marge %</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Object.entries(rechargeData.tarification.marges).map(([key, marge]) => (
-                        <tr key={key} className="border-b border-slate-800 hover:bg-slate-800/30">
-                          <td className="py-3 px-4 text-white font-semibold">{key.replace(/_/g, ' ')}</td>
-                          <td className="py-3 px-4"><span className={`px-2 py-1 rounded-full text-xs ${getPeriodeColor(key.includes('creuses') ? 'Creuses' : key.includes('pleines') ? 'Pleines' : 'Pointe')}`}>{key.includes('creuses') ? 'Creuses' : key.includes('pleines') ? 'Pleines' : 'Pointe'}</span></td>
-                          <td className="py-3 px-4 text-right text-slate-300">{marge.achat} FCFA</td>
-                          <td className="py-3 px-4 text-right text-blue-400 font-bold">{marge.vente} FCFA</td>
-                          <td className="py-3 px-4 text-right text-green-400 font-bold">{marge.marge} FCFA</td>
-                          <td className="py-3 px-4 text-right text-yellow-400 font-bold">{marge.margePercent}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              {/* Exemples */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                {rechargeData.tarification.exemples.map((ex, i) => (
-                  <div key={i} className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-yellow-500/30">
-                    <h5 className="font-bold text-white mb-3">{ex.scenario}</h5>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between"><span className="text-slate-400">kWh:</span><span className="text-white">{ex.kwh} kWh</span></div>
-                      <div className="flex justify-between"><span className="text-slate-400">Coût achat:</span><span className="text-red-400">{formatCurrency(ex.coutAchat)}</span></div>
-                      <div className="flex justify-between"><span className="text-slate-400">Tarif client:</span><span className="text-blue-400 font-bold">{formatCurrency(ex.tarifClient)}</span></div>
-                      <div className="flex justify-between border-t border-slate-700 pt-2"><span className="text-slate-300 font-semibold">Marge:</span><span className="text-green-400 font-bold">{formatCurrency(ex.marge)}</span></div>
-                      <div className="flex justify-between"><span className="text-slate-300 font-semibold">Marge %:</span><span className="text-yellow-400 font-bold">{ex.margePercent}%</span></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Revenus Mensuels */}
-              <div className="bg-gradient-to-br from-green-900/30 to-emerald-900/30 rounded-xl p-6 border border-green-500/30">
-                <h4 className="text-xl font-bold mb-4 text-green-400">Revenus Mensuels par Période</h4>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <p className="text-sm text-slate-400 mb-1">Heures Creuses</p>
-                    <p className="text-2xl font-bold text-blue-400">{formatNumber(rechargeData.tarification.revenusMensuels.creuses / 1000000, 1)}M</p>
-                    <p className="text-xs text-slate-500">{((rechargeData.tarification.revenusMensuels.creuses / rechargeData.tarification.revenusMensuels.total) * 100).toFixed(0)}%</p>
-                  </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <p className="text-sm text-slate-400 mb-1">Heures Pleines</p>
-                    <p className="text-2xl font-bold text-green-400">{formatNumber(rechargeData.tarification.revenusMensuels.pleines / 1000000, 1)}M</p>
-                    <p className="text-xs text-slate-500">{((rechargeData.tarification.revenusMensuels.pleines / rechargeData.tarification.revenusMensuels.total) * 100).toFixed(0)}%</p>
-                  </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <p className="text-sm text-slate-400 mb-1">Heures Pointe</p>
-                    <p className="text-2xl font-bold text-orange-400">{formatNumber(rechargeData.tarification.revenusMensuels.pointe / 1000000, 1)}M</p>
-                    <p className="text-xs text-slate-500">{((rechargeData.tarification.revenusMensuels.pointe / rechargeData.tarification.revenusMensuels.total) * 100).toFixed(0)}%</p>
-                  </div>
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <p className="text-sm text-slate-400 mb-1">Total Mensuel</p>
-                    <p className="text-2xl font-bold text-white">{formatNumber(rechargeData.tarification.revenusMensuels.total / 1000000, 1)}M</p>
-                    <p className="text-xs text-green-400">Marge: {rechargeData.tarification.revenusMensuels.margeNettePercent}%</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* BORNES */}
-        {activeTab === 'bornes' && (
-          <div className="space-y-6">
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6">Types de Bornes Disponibles</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {rechargeData.borneTypes.map((borne, i) => (
-                  <div key={i} className="bg-slate-900/50 rounded-xl p-6 border border-slate-700/50 hover:border-yellow-500/50 transition-all">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h4 className="text-2xl font-bold text-white mb-1">{borne.type}</h4>
-                        <p className="text-sm text-slate-400">{borne.usage}</p>
-                      </div>
-                      <Zap className="w-8 h-8 text-yellow-400" />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Puissance:</span>
-                        <span className="text-white font-bold">{borne.puissance} kW</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Temps charge:</span>
-                        <span className="text-blue-400 font-semibold">{borne.tempsCharge}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Coût installation:</span>
-                        <span className="text-orange-400 font-semibold">{formatCurrency(borne.coutInstallation)}</span>
-                      </div>
-                      <div className="flex justify-between border-t border-slate-700 pt-3">
-                        <span className="text-slate-300 font-semibold">Tarif client:</span>
-                        <span className="text-green-400 font-bold">{borne.tarifClient} FCFA/kWh</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Performance par Type */}
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6">Performance par Type de Borne</h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={rechargeData.performanceByType}>
+                <BarChart data={[
+                  { type: 'Lente 7kW', utilisation: performanceBornes.slow7kW.tauxUtilisation, revenu: performanceBornes.slow7kW.revenuTotal / 1000 },
+                  { type: 'Rapide 22kW', utilisation: performanceBornes.fast22kW.tauxUtilisation, revenu: performanceBornes.fast22kW.revenuTotal / 1000 },
+                  { type: 'Ultra 50kW', utilisation: performanceBornes.ultra50kW.tauxUtilisation, revenu: performanceBornes.ultra50kW.revenuTotal / 1000 }
+                ]}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
                   <XAxis dataKey="type" stroke="#94a3b8" />
                   <YAxis stroke="#94a3b8" />
-                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #eab308' }} />
+                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #3b82f6' }} />
                   <Legend />
-                  <Bar dataKey="utilisation" fill="#eab308" name="Utilisation (%)" />
+                  <Bar dataKey="utilisation" fill={COLORS.blue} name="Util. (%)" />
+                  <Bar dataKey="revenu" fill={COLORS.green} name="Rev. (K)" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* EXPANSION */}
-        {activeTab === 'expansion' && (
-          <div className="space-y-6">
-            <div className="bg-slate-800/50 rounded-2xl p-6">
-              <h3 className="text-2xl font-bold mb-6">Planning Expansion 2026</h3>
-              <div className="space-y-6">
-                {rechargeData.expansionPlan.map((phase, i) => (
-                  <div key={i} className="bg-slate-900/50 rounded-xl p-6 border border-slate-700/50">
-                    <h4 className="text-xl font-bold text-yellow-400 mb-4">{phase.phase}</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {phase.stations.map((station, j) => (
-                        <div key={j} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/30">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h5 className="font-bold text-white">{station.name}</h5>
-                              <p className="text-sm text-slate-400">{station.location}</p>
-                            </div>
-                            <span className={`text-xs px-2 py-1 rounded-full ${station.status === 'Planifié' ? 'bg-blue-500/20 text-blue-400' : station.status === 'Étude' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-slate-500/20 text-slate-400'}`}>{station.status}</span>
-                          </div>
-                          <div className="space-y-2 text-sm">
-                            <div className="flex justify-between"><span className="text-slate-400">Bornes:</span><span className="text-white">{station.bornes}</span></div>
-                            <div className="flex justify-between"><span className="text-slate-400">Budget:</span><span className="text-green-400 font-bold">{formatCurrency(station.budget)}</span></div>
-                          </div>
-                          <div className="mt-3 flex flex-wrap gap-1">
-                            {station.types.map((type, k) => (
-                              <span key={k} className="text-xs px-2 py-1 rounded bg-blue-500/10 text-blue-400">{type}</span>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
+          {activeTab === 'tendances' && (
+            <div className="space-y-6">
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-6">Utilisation 24/7</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={tendancesHoraires}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <XAxis dataKey="heure" stroke="#94a3b8" />
+                    <YAxis stroke="#94a3b8" />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #3b82f6' }} />
+                    <Legend />
+                    <Line type="monotone" dataKey="utilisation" stroke={COLORS.blue} strokeWidth={2} name="Utilisation (%)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-6">Revenus Horaires</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={tendancesHoraires}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <XAxis dataKey="heure" stroke="#94a3b8" />
+                    <YAxis stroke="#94a3b8" />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #10b981' }} />
+                    <Bar dataKey="revenus" fill={COLORS.green} name="Revenus (FCFA)" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'insights' && (
+            <div className="space-y-6">
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Users className="w-6 h-6 text-purple-400" />Abonnements
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {abonnements.slice(0, 4).map((abo, idx) => (
+                    <div key={idx} className="rounded-xl p-4 border-2 border-slate-700 text-center">
+                      <div className="text-lg font-bold">{abo.nom.split(' - ')[0]}</div>
+                      <div className="text-3xl font-bold text-blue-400 my-2">{formatNumber(abo.fraisMensuel)}</div>
+                      <div className="text-xs text-slate-500">FCFA/mois</div>
+                      {abo.reduction > 0 && <div className="mt-2 text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">-{abo.reduction}%</div>}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Lightbulb className="w-6 h-6 text-yellow-400" />Opportunités
+                </h3>
+                <div className="space-y-3">
+                  {insights.opportunites.slice(0, 3).map((opp, idx) => (
+                    <div key={idx} className="p-4 bg-green-900/20 border-l-4 border-green-500 rounded-lg">
+                      <p className="text-slate-200 text-sm">{opp}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Target className="w-6 h-6 text-blue-400" />Actions Prioritaires
+                </h3>
+                <div className="space-y-4">
+                  {insights.actions_recommandees.slice(0, 3).map((action, idx) => (
+                    <div key={idx} className="p-4 rounded-lg border-2 border-red-500 bg-red-900/20">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-500/30 text-red-300">{action.priorite}</span>
+                      </div>
+                      <h4 className="font-bold text-white mb-3">{action.action}</h4>
+                      <div className="grid grid-cols-3 gap-3 text-sm">
+                        <div className="bg-slate-900/50 p-2 rounded"><div className="text-slate-400 text-xs">Invest.</div><div className="font-bold text-blue-400">{action.investissement}</div></div>
+                        <div className="bg-slate-900/50 p-2 rounded"><div className="text-slate-400 text-xs">Impact</div><div className="font-bold text-green-400">{action.impact}</div></div>
+                        <div className="bg-slate-900/50 p-2 rounded"><div className="text-slate-400 text-xs">Délai</div><div className="font-bold text-purple-400">{action.delai}</div></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50">
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-green-400" />Prévisions 2026
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {Object.entries(previsions).map(([key, prev]) => (
+                    <div key={key} className={`p-4 rounded-lg border-2 ${key === 'scenario_realiste' ? 'border-green-500 bg-green-900/20' : 'border-slate-700'}`}>
+                      <div className="font-bold mb-3">
+                        {key === 'scenario_conservateur' && '🛡️ Conservateur'}
+                        {key === 'scenario_realiste' && '⭐ Réaliste'}
+                        {key === 'scenario_optimiste' && '🚀 Optimiste'}
+                      </div>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between"><span className="text-slate-400">Croissance:</span><span className="font-bold text-blue-400">+{prev.croissance}%</span></div>
+                        <div className="flex justify-between"><span className="text-slate-400">Rev M+12:</span><span className="font-bold">{prev.revenuM12}M</span></div>
+                        <div className="flex justify-between"><span className="text-slate-400">ROI:</span><span className="font-bold text-green-400">{prev.ROI} ans</span></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Modal Station */}
+        {selectedStation && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50" onClick={() => setSelectedStation(null)}>
+            <div className="bg-slate-900 rounded-2xl max-w-2xl w-full p-6 border border-slate-700" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold">{selectedStation.nom}</h2>
+                  <p className="text-slate-400">{selectedStation.localisation.adresse}</p>
+                </div>
+                <button onClick={() => setSelectedStation(null)} className="text-slate-400 hover:text-white">
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="bg-blue-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-slate-400 mb-1">Revenu Quotidien</div>
+                  <div className="text-2xl font-bold text-blue-400">{formatCurrency(selectedStation.performance.revenuJour)}</div>
+                </div>
+                <div className="bg-green-900/20 p-4 rounded-lg">
+                  <div className="text-sm text-slate-400 mb-1">Utilisation</div>
+                  <div className="text-2xl font-bold text-green-400">{selectedStation.performance.tauxUtilisation}%</div>
+                </div>
+              </div>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between"><span className="text-slate-400">Sessions/jour:</span><span className="font-semibold">{selectedStation.performance.sessionsJour}</span></div>
+                <div className="flex justify-between"><span className="text-slate-400">Énergie/jour:</span><span className="font-semibold">{selectedStation.performance.energieJour} kWh</span></div>
+                <div className="flex justify-between"><span className="text-slate-400">Satisfaction:</span><span className="font-semibold">⭐ {selectedStation.performance.satisfaction}/5</span></div>
               </div>
             </div>
           </div>

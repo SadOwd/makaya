@@ -1,0 +1,128 @@
+// 🚀 rechargeDataFinal.js - Version Optimisée
+
+const COST_PER_KWH = 148.6;
+
+// -----------------------
+// Stations détaillées avec calculs dynamiques
+// -----------------------
+export const stations = [
+  {
+    id: 'ST001', nom: 'Station Aéroport', localisation: { zone: 'Aéroport Gnassingbé Eyadema', adresse: 'Route Aéroport, Lomé', coordonnees: { lat: 6.1656, lng: 1.2545 } },
+    bornes: [ { type: 'ultra50kW', nombre: 2, statut: 'actif' }, { type: 'fast22kW', nombre: 2, statut: 'actif' } ],
+    performance: { sessionsJour: 45, energieJour: 892, tauxUtilisation: 91, satisfaction: 4.8 },
+    tarificationActive: 'Premium', typeClientele: 'Business, Tourisme, VIP',
+    energieAnnuel: 892 * 365,
+    sessionsAnnuel: 45 * 365,
+    revenuAnnuel_FCFA: Math.round(892 * 365 * 230),
+    coutAnnuel_FCFA: Math.round(892 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((892 * 365 * 230) - (892 * 365 * COST_PER_KWH)),
+    coutComplet_FCFA_per_kWh: COST_PER_KWH
+  },
+  {
+    id: 'ST002', nom: 'Station Centre-Ville', localisation: { zone: 'Boulevard du 13 Janvier', adresse: 'Face Hôtel Sarakawa, Lomé', coordonnees: { lat: 6.1372, lng: 1.2123 } },
+    bornes: [ { type: 'fast22kW', nombre: 3, statut: 'actif' }, { type: 'slow7kW', nombre: 2, statut: 'actif' } ],
+    performance: { sessionsJour: 38, energieJour: 745, tauxUtilisation: 82, satisfaction: 4.6 },
+    tarificationActive: 'Standard', typeClientele: 'Urbain, Commercial, Résidentiel',
+    energieAnnuel: 745 * 365, sessionsAnnuel: 38 * 365,
+    revenuAnnuel_FCFA: Math.round(745 * 365 * 200), coutAnnuel_FCFA: Math.round(745 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((745 * 365 * 200) - (745 * 365 * COST_PER_KWH)), coutComplet_FCFA_per_kWh: COST_PER_KWH
+  },
+  {
+    id: 'ST003', nom: 'Station Port Autonome', localisation: { zone: 'Zone Portuaire', adresse: 'Avenue du Port, Lomé', coordonnees: { lat: 6.1289, lng: 1.2287 } },
+    bornes: [ { type: 'ultra50kW', nombre: 3, statut: 'actif' }, { type: 'fast22kW', nombre: 1, statut: 'maintenance' } ],
+    performance: { sessionsJour: 32, energieJour: 678, tauxUtilisation: 64, satisfaction: 4.5 },
+    tarificationActive: 'Pro', typeClientele: 'Logistique, Fret, Commercial',
+    energieAnnuel: 678 * 365, sessionsAnnuel: 32 * 365,
+    revenuAnnuel_FCFA: Math.round(678 * 365 * 220), coutAnnuel_FCFA: Math.round(678 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((678 * 365 * 220) - (678 * 365 * COST_PER_KWH)), coutComplet_FCFA_per_kWh: COST_PER_KWH
+  },
+  {
+    id: 'ST004', nom: 'Station Université', localisation: { zone: 'Campus Universitaire', adresse: 'Boulevard de la Kara, Lomé', coordonnees: { lat: 6.1744, lng: 1.2089 } },
+    bornes: [ { type: 'fast22kW', nombre: 2, statut: 'actif' }, { type: 'slow7kW', nombre: 2, statut: 'actif' } ],
+    performance: { sessionsJour: 24, energieJour: 512, tauxUtilisation: 72, satisfaction: 4.7 },
+    tarificationActive: 'Étudiant', typeClientele: 'Étudiants, Personnel, Visiteurs',
+    energieAnnuel: 512 * 365, sessionsAnnuel: 24 * 365,
+    revenuAnnuel_FCFA: Math.round(512 * 365 * 180), coutAnnuel_FCFA: Math.round(512 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((512 * 365 * 180) - (512 * 365 * COST_PER_KWH)), coutComplet_FCFA_per_kWh: COST_PER_KWH
+  },
+  {
+    id: 'ST005', nom: 'Station Hôtel 2 Février', localisation: { zone: 'Quartier Administratif', adresse: 'Avenue de la Libération, Lomé', coordonnees: { lat: 6.1313, lng: 1.2198 } },
+    bornes: [ { type: 'ultra50kW', nombre: 2, statut: 'actif' }, { type: 'fast22kW', nombre: 1, statut: 'actif' }, { type: 'slow7kW', nombre: 1, statut: 'actif' } ],
+    performance: { sessionsJour: 28, energieJour: 623, tauxUtilisation: 76, satisfaction: 4.9 },
+    tarificationActive: 'Premium', typeClientele: 'Hôtel, Tourisme, Business',
+    energieAnnuel: 623 * 365, sessionsAnnuel: 28 * 365,
+    revenuAnnuel_FCFA: Math.round(623 * 365 * 230), coutAnnuel_FCFA: Math.round(623 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((623 * 365 * 230) - (623 * 365 * COST_PER_KWH)), coutComplet_FCFA_per_kWh: COST_PER_KWH
+  },
+  {
+    id: 'ST006', nom: 'Station Adidogomé', localisation: { zone: 'Carrefour Adidogomé', adresse: 'Route Nationale N1, Lomé', coordonnees: { lat: 6.1498, lng: 1.1956 } },
+    bornes: [ { type: 'ultra50kW', nombre: 1, statut: 'actif' }, { type: 'fast22kW', nombre: 1, statut: 'maintenance' }, { type: 'slow7kW', nombre: 1, statut: 'actif' } ],
+    performance: { sessionsJour: 19, energieJour: 442, tauxUtilisation: 48, satisfaction: 4.4 },
+    tarificationActive: 'Standard', typeClientele: 'Résidentiel, Passage, Local',
+    energieAnnuel: 442 * 365, sessionsAnnuel: 19 * 365,
+    revenuAnnuel_FCFA: Math.round(442 * 365 * 200), coutAnnuel_FCFA: Math.round(442 * 365 * COST_PER_KWH),
+    profitAnnuel_FCFA: Math.round((442 * 365 * 200) - (442 * 365 * COST_PER_KWH)), coutComplet_FCFA_per_kWh: COST_PER_KWH
+  }
+];
+
+// -----------------------
+// Tarifs par type de borne
+// -----------------------
+export const tarifsBornes = {
+  slow7kW: { nom: 'Charge Lente 7kW', puissance: 7, prixKWh: 110, tempsChargeMoyen: 6 },
+  fast22kW: { nom: 'Charge Rapide 22kW', puissance: 22, prixKWh: 125, tempsChargeMoyen: 2.5 },
+  ultra50kW: { nom: 'Charge Ultra-Rapide 50kW', puissance: 50, prixKWh: 135, tempsChargeMoyen: 0.8 }
+};
+
+// -----------------------
+// Abonnements optimisés
+// -----------------------
+export const abonnements = [
+  { nom: 'START', fraisMensuel: 0, reduction: 0 },
+  { nom: 'ESSENTIAL', fraisMensuel: 7000, reduction: 13 },
+  { nom: 'PRO+', fraisMensuel: 18000, reduction: 12 },
+  { nom: 'ULTRA', fraisMensuel: 42000, reduction: 18 },
+  { nom: 'BLACK LABEL', fraisMensuel: 85000, reduction: 10 }
+];
+
+// -----------------------
+// KPI synthétiques
+// -----------------------
+export const kpis = {
+  financiers: { tauxMarge: 42.8, revenuParBorne: 10233, revenuParSession: 1575, coutOperationnel: 98400, beneficeNet: 147200, ROImensuel: 149.6 },
+  operationnels: { tauxDisponibilite: 91.7, tempsArretMoyen: 2.1, nombreIncidents: 3, tempsReponse: 18, satisfactionGlobale: 4.7 },
+  energie: { efficaciteDistribution: 96.2, pertesReseau: 3.8, facteurCharge: 78.5, consommationPeak: 856, autonomieReseau: 99.2 }
+};
+
+// -----------------------
+// Périodes horaires
+// -----------------------
+export const periodesHoraires = {
+  creuses: { periode: '22h-6h', duree: 8, prixKWh: 85, energieDistribuee: 850 },
+  pleines: { periode: '6h-18h', duree: 12, prixKWh: 120, energieDistribuee: 2687 },
+  pointe: { periode: '18h-22h', duree: 4, prixKWh: 145, energieDistribuee: 1355 }
+};
+
+// -----------------------
+// Prévisions financières
+// -----------------------
+export const previsions = {
+  conservateur: { croissance: 8, revenuM12: 95.36 },
+  realiste: { croissance: 15, revenuM12: 101.68 },
+  optimiste: { croissance: 25, revenuM12: 110.52 }
+};
+
+// -----------------------
+// Insights et actions
+// -----------------------
+export const insights = {
+  opportunites: [
+    'Maximiser capacité heures de pointe',
+    'Prioriser bornes ultra-rapides',
+    'Répliquer le modèle Aéroport sur d’autres hubs'
+  ],
+  actions: [
+    { action: 'Installer 2 bornes ultra-rapides Aéroport', priorite: 'Critique', impact: '+12%', investissement: '18M' },
+    { action: 'Campagne abonnements heures creuses', priorite: 'Haute', impact: '+500 abonnés', investissement: '3M' }
+  ]
+};
