@@ -1,0 +1,237 @@
+voici la nouvelle données pour les bornes que makaya mettra en place 
+adapte notre strategie en fonction des ces nouvelles données. 
+
+
+MAKAYA RECHARGE - ANALYSE COMPARATIVE OPTIMISÉE
+Stratégie de Déploiement Multi-Puissance
+
+📊 TABLEAU DE BORD COMPARATIF
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    PORTEFEUILLE MAKAYA RECHARGE                           ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║ Type     │Puissance│ Temps  │ CAPEX    │ Coût    │ Tarif │ Marge │ ROI  ║
+║          │         │20→80%  │  (MFCFA) │ /kWh    │ /kWh  │ Nette │      ║
+╟──────────┼─────────┼────────┼──────────┼─────────┼───────┼───────┼──────╢
+║ AC 7kW   │  7 kW   │ 4h30   │   4,8    │ 363 F   │ 180 F │ ❌    │  -   ║
+║ 🏠       │         │        │          │         │       │-152%  │      ║
+╟──────────┼─────────┼────────┼──────────┼─────────┼───────┼───────┼──────╢
+║ AC 22kW  │ 22 kW   │ 1h30   │  14,3    │ 198 F   │ 210 F │ ✅    │ 9,9  ║
+║ 🏢       │         │        │          │         │       │ 5,7%  │ ans  ║
+╟──────────┼─────────┼────────┼──────────┼─────────┼───────┼───────┼──────╢
+║ DC 50kW  │ 50 kW   │ 28min  │  52,5    │ 175 F   │ 235 F │ ✅    │ 3,3  ║
+║ ⚡       │         │        │          │         │       │ 20,3% │ ans  ║
+╟──────────┼─────────┼────────┼──────────┼─────────┼───────┼───────┼──────╢
+║ DC 150kW │ 150 kW  │ 12min  │ 105,4    │ 186 F   │ 275 F │ ✅    │ 1,9  ║
+║ 🚀       │         │        │          │         │       │ 32,5% │ ans  ║
+╟──────────┼─────────┼────────┼──────────┼─────────┼───────┼───────┼──────╢
+║ DC 350kW │ 350 kW  │  8min  │ 187,0    │ 221 F   │ 320 F │ ✅    │ 2,4  ║
+║ 🔥       │         │        │          │         │       │ 30,8% │ ans  ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+💡 ANALYSE DÉTAILLÉE PAR SEGMENT
+1️⃣ AC 7kW - NON VIABLE EN USAGE PUBLIC
+Structure de coûts (15 000 kWh/an, 60% occupation)
+PosteMontant annuel% du totalÉlectricité1 338 000 F24,6%Fixes (maintenance, loyer, etc.)2 520 000 F46,3%Capital (amortissement + coût)1 093 000 F20,1%IT & transactions493 000 F9,0%TOTAL5 444 000 F100%
+Verdict : ❌ NON RENTABLE
+
+Coût réel : 363 F/kWh vs Tarif marché : 180 F/kWh
+Déficit annuel : -2,7 MFCFA
+Seuil de rentabilité : 520 F/kWh (inatteignable)
+
+Usage recommandé : Privatif uniquement (domicile, flottes captives)
+
+2️⃣ AC 22kW - RENTABLE MAIS MARGINAL
+Structure de coûts (120 000 kWh/an, 70% occupation)
+PosteMontant annuel% du totalÉlectricité10 704 000 F45,0%Fixes8 620 000 F36,3%Capital2 921 000 F12,3%IT & transactions1 520 000 F6,4%TOTAL23 765 000 F100%
+Performance financière
+
+Revenus : 25,2 MFCFA (210 F/kWh)
+Bénéfice net : +1,4 MFCFA
+Marge nette : 5,7% | EBITDA : 17,2%
+ROI : 9,9 ans
+
+Positionnement optimal
+
+✅ Centres commerciaux (durée visite 1-3h)
+✅ Hôtels et résidences affaires
+✅ Parkings B2B (flottes corporate)
+⚠️ Sensible aux coûts fixes (loyer)
+
+
+3️⃣ DC 50kW - RÉFÉRENCE MARCHÉ ⭐
+Détail complet maintenu du document original
+Points clés
+
+Coût complet : 175 F/kWh (année 3, 85% occupation)
+Marge nette : 20,3% | EBITDA : 33,9%
+ROI : 3,3 ans
+Volume : 357 000 kWh/an
+
+Avantages stratégiques
+
+✅ Meilleur compromis coût/performance
+✅ Compatible 95% du parc VE actuel
+✅ Temps de charge acceptable (28 min)
+✅ CAPEX maîtrisé (52,5 MFCFA)
+
+
+4️⃣ DC 150kW - CHAMPION RENTABILITÉ 🏆
+Structure de coûts (630 000 kWh/an, 65% occupation)
+PosteMontant annuel% du totalÉlectricité + pertes60 692 000 F51,9%Fixes (dont maintenance 12,6M)28 270 000 F24,2%Capital21 607 000 F18,5%IT & transactions6 357 000 F5,4%TOTAL116 926 000 F100%
+Performance exceptionnelle
+
+Revenus : 173,3 MFCFA (275 F/kWh)
+Bénéfice net : +56,3 MFCFA 🚀
+Marge nette : 32,5% | EBITDA : 45,7%
+ROI : 1,9 ans (meilleur du portefeuille)
+
+Facteurs de succès
+
+Tarif premium justifié (-16 min vs DC 50kW)
+Volume élevé (630 MWh/an)
+Effet d'échelle sur les fixes
+Demande forte sur axes autoroutiers
+
+Emplacements prioritaires
+
+🛣️ Autoroutes nationales (axes Lomé-Kara)
+🏪 Hubs transit multimodaux
+⛽ Stations-service premium
+🏨 Complexes hôteliers d'affaires
+
+
+5️⃣ DC 350kW - FLAGSHIP STRATÉGIQUE
+Structure de coûts (780 000 kWh/an, 55% occupation)
+PosteMontant annuel% du totalÉlectricité + pertes76 534 000 F44,3%Fixes (dont maintenance 22M)48 620 000 F28,2%Capital38 335 000 F22,2%IT & transactions9 139 000 F5,3%TOTAL172 628 000 F100%
+Rentabilité premium
+
+Revenus : 249,6 MFCFA (320 F/kWh)
+Bénéfice net : +77,0 MFCFA
+Marge nette : 30,8% | EBITDA : 43,6%
+ROI : 2,4 ans
+
+Considérations stratégiques
+⚠️ Contraintes
+
+CAPEX très élevé (187 MFCFA)
+Parc VE compatible limité (≤5% actuellement)
+Maintenance intensive (+22 MFCFA/an)
+Occupation plus faible (55% vs 65-85%)
+
+✅ Avantages
+
+Image de marque premium
+Différenciation concurrentielle
+Tarif élevé accepté (320 F/kWh)
+Évolutivité parc VE
+
+Déploiement sélectif
+
+✈️ Aéroport international Lomé-Gnassingbé
+🏛️ Sites institutionnels majeurs
+🏪 Flagship stores stratégiques (1-2 max phase 1)
+
+
+🎯 STRATÉGIE DE DÉPLOIEMENT OPTIMALE
+Phase 1 (Années 1-2) : Fondations
+Objectif : Établir la présence et valider le modèle
+Portfolio recommandé : 70% DC 50kW | 25% DC 150kW | 5% AC 22kW
+Mix optimal - 40 bornes
+
+28 × DC 50kW (70%) → Urbain + semi-urbain
+
+CAPEX : 1 470 MFCFA
+Revenus projetés : 2 200 MFCFA/an
+Bénéfice année 3 : +445 MFCFA/an
+
+
+10 × DC 150kW (25%) → Autoroutes
+
+CAPEX : 1 054 MFCFA
+Revenus projetés : 1 733 MFCFA/an
+Bénéfice année 3 : +563 MFCFA/an
+
+
+2 × AC 22kW (5%) → Test B2B
+
+CAPEX : 28,5 MFCFA
+Revenus projetés : 50 MFCFA/an
+Bénéfice : +3 MFCFA/an
+
+
+
+Investissement total Phase 1 : 2 552 MFCFA
+Revenus annuels (année 3) : 3 983 MFCFA
+Bénéfice net projeté : +1 011 MFCFA/an (marge 25,4%)
+
+Phase 2 (Années 3-4) : Densification
+Objectif : Saturer les corridors rentables
+Portfolio : 60% DC 50kW | 30% DC 150kW | 8% AC 22kW | 2% DC 350kW
+Ajout de 60 bornes
+
+36 × DC 50kW (densification urbaine)
+18 × DC 150kW (maillage autoroutier)
+5 × AC 22kW (B2B prouvé)
+1 × DC 350kW (flagship aéroport)
+
+Investissement Phase 2 : 3 226 MFCFA
+Revenus cumulés (100 bornes) : 9 500 MFCFA/an
+Bénéfice net : +2 650 MFCFA/an (marge 27,9%)
+
+📈 INDICATEURS DE PERFORMANCE PAR TYPE
+MétriqueAC 22kWDC 50kWDC 150kWDC 350kWCAPEX unitaire14,3 M52,5 M105,4 M187,0 MCoût/kWh198 F175 F186 F221 FTarif/kWh210 F235 F275 F320 FMarge nette5,7%20,3%32,5%30,8%EBITDA17,2%33,9%45,7%43,6%ROI9,9 ans3,3 ans1,9 ans2,4 anskWh/an120K357K630K780KRevenus/an25,2 M78,5 M173,3 M249,6 MBénéfice/an+1,4 M+15,9 M+56,3 M+77,0 M
+
+🎪 RECOMMANDATIONS STRATÉGIQUES
+Priorité 1 : DC 150kW (Champion absolu)
+Déployer massivement sur :
+
+Autoroute Lomé-Atakpamé-Kara (6 stations)
+Route nationale N1 (3 stations)
+Périphérique Lomé (2 stations)
+
+ROI exceptionnel : 1,9 ans | Marge : 32,5%
+Priorité 2 : DC 50kW (Socle fiable)
+Maillage urbain et semi-urbain :
+
+Centres-villes (Lomé, Kara, Sokodé)
+Zones commerciales
+Parkings publics
+
+ROI solide : 3,3 ans | Marge : 20,3%
+Priorité 3 : AC 22kW (Niche B2B)
+Uniquement si contrats garantis :
+
+Flottes corporate (durée ≥3 ans)
+Hôtels partenaires (revenus fixes)
+Parkings privés (redevance minimale)
+
+ROI long : 9,9 ans | Marge : 5,7%
+Opportuniste : DC 350kW (1-2 sites flagship)
+Emplacements ultra-sélectifs :
+
+Aéroport Lomé (visibilité maximale)
+Futur hub multimodal (si confirmé)
+
+ROI acceptable : 2,4 ans | Marge : 30,8%
+Mais : CAPEX élevé + parc VE limité
+
+⚠️ RISQUES ET MITIGATION
+RisqueImpactProbabilitéMitigationSous-utilisation AC 7kWTrès élevéCertaine❌ Ne pas déployer en publicVandalisme bornes isoléesMoyenMoyenneSurveillance + assuranceObsolescence DC 350kWFaibleFaibleDéploiement limité (1-2)Hausse tarif électricitéÉlevéMoyenneClause révision tarifaireConcurrence agressiveMoyenMoyenneFidélisation + qualité service
+
+🏁 CONCLUSION : MIX OPTIMAL RECOMMANDÉ
+Portfolio cible 100 bornes (Année 4) :
+📊 Répartition stratégique optimale :
+   
+   ████████████████████████████████████████ 60% DC 50kW (60 bornes)
+   ████████████████████████ 30% DC 150kW (30 bornes)
+   ████ 8% AC 22kW (8 bornes)
+   █ 2% DC 350kW (2 bornes)
+Performance globale projetée (Année 4) :
+
+CAPEX cumulé : 5 778 MFCFA
+Revenus annuels : 9 500 MFCFA
+EBITDA : 3 850 MFCFA (40,5%)
+Bénéfice net : +2 650 MFCFA (marge 27,9%)
+ROI moyen portfolio : 2,8 ans
+
+Clé du succès : 90% des bornes = DC 50-150kW (ROI < 3,5 ans)

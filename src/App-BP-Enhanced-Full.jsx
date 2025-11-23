@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Zap, Home, BarChart3 } from 'lucide-react';
+import BusinessPlanJuridique from './pages/BusinessPlanJuridique';
+import { Zap, Home, BarChart3, Scale } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import DashboardPrincipal from './components/DashboardPrincipal';
 import MakayaRide from './pages/MakayaRide';
@@ -189,3 +190,4 @@ const App = () => {
 };
 
 export default App;
+

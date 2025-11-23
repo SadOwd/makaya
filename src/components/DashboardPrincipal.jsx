@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, DollarSign, Users, Zap, AlertTriangle, CheckCircle, Download, FileText, Calendar, Target, Award, Shield, Activity, ArrowUp, ArrowDown, Crown } from 'lucide-react';
+import { TrendingUp, DollarSign, Users, Zap, AlertTriangle, CheckCircle, Download, FileText, Calendar, Target, Award, Shield, Activity, ArrowUp, ArrowDown, Crown, Scale } from 'lucide-react';
 import { businessPlanData } from '../data/businessPlanEnrichedData';
+import BusinessPlanJuridique from '../pages/BusinessPlanJuridique';
 
 const DashboardPrincipal = () => {
   const [liveUpdate, setLiveUpdate] = useState(true);
@@ -21,6 +22,7 @@ const DashboardPrincipal = () => {
     { id: 'alertes', label: 'Alertes & Risques', icon: AlertTriangle },
     { id: 'scenarios', label: 'Scénarios', icon: Target },
     { id: 'roadmap', label: 'Roadmap', icon: Calendar },
+    { id: 'juridique', label: 'Cadre Juridique', icon: Scale },
     { id: 'export', label: 'Export', icon: Download }
   ];
 
@@ -212,6 +214,10 @@ const DashboardPrincipal = () => {
             </div>
           ))}
         </div>
+      )}
+
+      {activeTab === 'juridique' && (
+        <BusinessPlanJuridique onNavigate={setActiveTab} />
       )}
 
       {activeTab === 'export' && (
