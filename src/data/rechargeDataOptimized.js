@@ -163,13 +163,13 @@ overview: {
       nom: "START - Liberté & Micro-Frais",
       type: "sans_abonnement",
       fraisMensuel: 0,
-      fraisSession: 150,
+      fraisSession: 1000,
       reduction: 0,
       color: "slate",
       emoji: "🟩",
       avantages: [
         "Aucun engagement",
-        "Frais fixes 150 FCFA par session",
+        "Frais fixes 1000 FCFA par session",
         "Tarifs standards",
         "Accès au réseau complet"
       ],

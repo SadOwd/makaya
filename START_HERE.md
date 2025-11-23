@@ -1,62 +1,97 @@
-# ⚡ DÉMARRAGE IMMÉDIAT - MAKAYA ENERGY
+# 🚀 DÉMARRER ICI - MakayaRecharge.jsx
 
-## 🚀 3 ÉTAPES SEULEMENT !
+## ⚡ DÉMARRAGE RAPIDE (3 ÉTAPES)
 
-### 1️⃣ LANCER LE SCRIPT
+### 1️⃣ FUSIONNER LES FICHIERS
 ```
-👉 Double-cliquez sur : FUSIONNER_JURIDIQUE_ET_RECHARGE.bat
+Double-cliquez sur: FUSIONNER_MAKAYA_RECHARGE.bat
 ```
+⏱️ Durée: 5 secondes
 
-### 2️⃣ ATTENDRE LE SUCCÈS
-```
-✅ BusinessPlanJuridique.jsx fusionné avec succès
-✅ MakayaRecharge.jsx mis à jour avec succès
-✅ FUSION ET MISE À JOUR RÉUSSIES!
-```
-
-### 3️⃣ TESTER
+### 2️⃣ LANCER L'APPLICATION
 ```bash
 npm run dev
 ```
+⏱️ Durée: 10 secondes
+
+### 3️⃣ TESTER
+Visitez: **Makaya Recharge** dans l'application
+⏱️ Durée: 2 minutes
 
 ---
 
-## 📍 Où voir les résultats ?
+## ✅ CE QUE VOUS OBTENEZ
 
-### Business Plan ⚖️
-`Business Plan > Cadre Juridique`
-- 523M FCFA valeur
-- 157% ROI
-- 8 sections
+### 📦 Fichier Fusionné
+```
+src/pages/MakayaRecharge.jsx  (34 KB, 1,100 lignes)
+```
 
-### Makaya Recharge ⚡
-`Menu principal > Makaya Recharge`
-- 9.5 Milliards revenus
-- 5 abonnements
-- 5 types bornes
+### 🎨 5 Onglets Fonctionnels
+1. **Vue d'Ensemble** → KPIs + Graphique + 6 Stations
+2. **Types de Bornes** → 4 types avec ROI
+3. **Abonnements** → 5 formules cliquables ⭐
+4. **Tendances** → 3 graphiques animés
+5. **Insights** → Analyses + Prévisions
 
----
-
-## ⚠️ Problème ?
-
-### Le script échoue ?
-Lisez : `CHECKLIST_PRE_EXECUTION.md`
-
-### La page ne s'affiche pas ?
-Vérifiez : Console (F12) et terminal npm
-
-### Besoin d'aide ?
-Consultez : `README_DEMARRAGE.md`
+### 💎 Modals Interactifs
+- ✅ Cliquez sur **stations** → Détails complets
+- ✅ Cliquez sur **abonnements** → Offres détaillées ⭐
 
 ---
 
-## 📚 Documentation complète
+## 📊 CONTENU
 
-Pour tout savoir :
-`RECAPITULATIF_COMPLET_FINAL.md`
+### Données Affichées
+- 💰 9.5 Mds FCFA revenus annuels
+- ⚡ 456 sessions/jour
+- 📈 76% taux d'utilisation
+- 👥 6,234 abonnés actifs
+
+### Stations (6)
+- Lomé Centre-Ville, Aéroport, Tokoin, Université, Port, Agoè
+
+### Abonnements (5) ⭐
+- Essentiel, Confort 🌟, Premium, Business, Famille
+
+### Types de Bornes (4)
+- Lente, Standard, Rapide, Ultra-rapide
 
 ---
 
-**C'est tout ! 3 étapes et c'est parti ! 🚀**
+## 🎯 VÉRIFICATION RAPIDE
 
-© 2025 Makaya Energy 🇹🇬
+Après fusion, vérifiez:
+- [ ] Message "✅ FUSION RÉUSSIE !"
+- [ ] Fichier créé: `src/pages/MakayaRecharge.jsx`
+- [ ] Taille: ~34 KB
+
+Après lancement:
+- [ ] Page s'affiche sans erreur
+- [ ] 5 onglets cliquables
+- [ ] Modals stations fonctionnent
+- [ ] **Modals abonnements détaillés** ⭐
+
+---
+
+## 📚 BESOIN D'AIDE ?
+
+### Lire la documentation:
+1. **GUIDE_FUSION_MAKAYA_RECHARGE.md** → Guide complet
+2. **RECAPITULATIF_MAKAYA_RECHARGE.md** → Vue d'ensemble
+
+### Problème courant:
+**Script ne s'exécute pas?**
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+---
+
+## 🎊 C'EST TOUT !
+
+Vous êtes prêt en **moins de 1 minute** ! 🚀
+
+**Action:** Double-cliquez sur `FUSIONNER_MAKAYA_RECHARGE.bat` maintenant ! 
+
+🇹🇬⚡
