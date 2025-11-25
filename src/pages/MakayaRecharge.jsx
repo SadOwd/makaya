@@ -1,4 +1,8 @@
-// PARTIE 1/3 - Imports, données et composants de base
+// ============================================================
+// MAKAYA RECHARGE - PARTIE 1/3
+// Imports, Configuration, Données et Composants de Base
+// ============================================================
+
 import React, { useState } from 'react';
 import { 
   TrendingUp, 
@@ -27,7 +31,28 @@ import {
   Crown,
   X
 } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, PieChart as RechartsPie, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { 
+  LineChart, 
+  Line, 
+  BarChart, 
+  Bar, 
+  PieChart as RechartsPie, 
+  Pie, 
+  Cell, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer, 
+  Area, 
+  AreaChart, 
+  RadarChart, 
+  PolarGrid, 
+  PolarAngleAxis, 
+  PolarRadiusAxis, 
+  Radar 
+} from 'recharts';
 import rechargeDataOptimized from '../data/rechargeDataOptimized';
 
 const MakayaRecharge = () => {
@@ -113,7 +138,9 @@ const MakayaRecharge = () => {
     { type: 'Lente', satisfaction: 78, utilisation: 65, fiabilite: 85 }
   ];
 
-  // Composant KPI Card
+  // ============================================================
+  // COMPOSANT: KPI Card
+  // ============================================================
   const KPICard = ({ icon: Icon, label, value, change, color }) => {
     const colorClasses = {
       blue: 'from-blue-500 to-blue-600',
@@ -144,7 +171,9 @@ const MakayaRecharge = () => {
     );
   };
 
-  // Composant Station Card
+  // ============================================================
+  // COMPOSANT: Station Card
+  // ============================================================
   const StationCard = ({ station, onClick }) => (
     <div 
       onClick={() => onClick(station)}
@@ -190,7 +219,9 @@ const MakayaRecharge = () => {
     </div>
   );
 
-  // Modal Station détaillée
+  // ============================================================
+  // COMPOSANT: Modal Station (Détails complets)
+  // ============================================================
   const StationModal = ({ station, onClose }) => {
     if (!station) return null;
 
@@ -199,7 +230,7 @@ const MakayaRecharge = () => {
         <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
             <h2 className="text-2xl font-bold text-gray-900">{station.nom}</h2>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg">
+            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-all">
               <X className="w-6 h-6" />
             </button>
           </div>
@@ -299,8 +330,9 @@ const MakayaRecharge = () => {
     );
   };
 
+  // ============================================================
   
-  // CONTINUER AVEC PARTIE 2/3
+  // ============================================================
 
   
   // Composant Modal Abonnement
