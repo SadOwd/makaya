@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
   TrendingUp, DollarSign, Users, Target, AlertTriangle, Calendar, 
-  FileText, StickyNote, Edit2, Save, Download, Car, Zap, Battery
+  FileText, StickyNote, Edit2, Save, Download, Car, Zap, Battery,
+  Award, Sparkles
 } from 'lucide-react';
 
 // Import Recharge components
@@ -12,11 +13,17 @@ import Risks from './components/Risks';
 import Roadmap from './components/Roadmap';
 import Export from './components/Export';
 
+// 🆕 NOUVEAUX COMPOSANTS - Système Unifié Tarifs
+import TestSysteme from './components/TestSysteme';
+import ExemplesUsage from './components/ExemplesUsageTarifs';
+
 function App() {
   const [activeSection, setActiveSection] = useState('recharge');
   const [editMode, setEditMode] = useState(false);
 
   const sections = {
+    testTarifs: { title: 'Test Système', icon: Award },
+    exemplesTarifs: { title: 'Exemples Tarifs', icon: Sparkles },
     recharge: { title: 'Makaya Recharge', icon: Zap },
     dashboard: { title: 'Dashboard Global', icon: TrendingUp },
     scenarios: { title: 'Scénarios', icon: Target },
@@ -27,6 +34,12 @@ function App() {
 
   const renderContent = () => {
     switch (activeSection) {
+      case 'testTarifs':
+        return <TestSysteme />;
+      
+      case 'exemplesTarifs':
+        return <ExemplesUsage />;
+      
       case 'recharge':
         return <RechargeMain />;
       

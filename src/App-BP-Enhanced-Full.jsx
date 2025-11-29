@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import BusinessPlanJuridique from './pages/BusinessPlanJuridique';
-import { Zap, Home, BarChart3, Scale, Radio } from 'lucide-react';
+import { Zap, Home, BarChart3, Scale, Radio, Award, Sparkles, FileText } from 'lucide-react';
 import HomePage from './pages/HomePage';
 import DashboardPrincipal from './components/DashboardPrincipal';
 import MakayaRide from './pages/MakayaRide';
 import MakayaRideNeon from './pages/MakayaRideNeon';
+import MakayaRideNeonPro from './pages/MakayaRideNeonPro';
 import MakayaMobility from './pages/MakayaMobility';
 import MakayaRecharge from './pages/MakayaRecharge';
+import CahierChargeRecharge from './pages/CahierChargeRecharge';
+
+// 🆕 NOUVEAUX COMPOSANTS - Système Unifié Tarifs
+import TestSysteme from './components/TestSysteme';
+import ExemplesUsage from './components/ExemplesUsageTarifs';
 
 const App = () => {
   const [currentView, setCurrentView] = useState('home');
@@ -72,12 +78,12 @@ const App = () => {
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl max-w-2xl w-full p-8 border border-orange-500/50" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/50">
+            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/50 animate-pulse">
               <Radio className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-white">NEON - Interface VTC</h2>
-              <p className="text-slate-400 text-sm">Application de réservation moderne</p>
+              <h2 className="text-2xl font-bold text-white">NEON PRO - Interface VTC</h2>
+              <p className="text-slate-400 text-sm">Réservation style Uber/Bolt/Yango</p>
             </div>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-white transition">
@@ -88,18 +94,18 @@ const App = () => {
         </div>
         <div className="space-y-4">
           <p className="text-slate-300 leading-relaxed">
-            Découvrez l'interface NEON de Makaya Ride : une expérience de réservation VTC futuriste avec effets néon, animations fluides et design cyberpunk.
+            Découvrez l'interface NEON PRO de Makaya Ride : une expérience de réservation VTC professionnelle avec carte interactive, recherche intelligente de lieux, sélection de véhicules en temps réel et suivi de course.
           </p>
           <div className="grid grid-cols-3 gap-4 my-6">
-            <div className="bg-slate-800/50 rounded-lg p-4 text-center">
-              <p className="text-3xl mb-1">🚗</p>
-              <p className="text-slate-400 text-xs">3 types</p>
+            <div className="bg-slate-800/50 rounded-lg p-4 text-center border border-orange-500/20">
+              <p className="text-3xl mb-1">🗺️</p>
+              <p className="text-slate-400 text-xs">Carte interactive</p>
             </div>
-            <div className="bg-slate-800/50 rounded-lg p-4 text-center">
+            <div className="bg-slate-800/50 rounded-lg p-4 text-center border border-green-500/20">
               <p className="text-3xl mb-1">⚡</p>
-              <p className="text-slate-400 text-xs">100% EV</p>
+              <p className="text-slate-400 text-xs">Temps réel</p>
             </div>
-            <div className="bg-slate-800/50 rounded-lg p-4 text-center">
+            <div className="bg-slate-800/50 rounded-lg p-4 text-center border border-blue-500/20">
               <p className="text-3xl mb-1">🎨</p>
               <p className="text-slate-400 text-xs">Design Neon</p>
             </div>
@@ -107,34 +113,13 @@ const App = () => {
           <button 
             onClick={() => {
               onClose();
-              setCurrentView('ride-neon');
+              setCurrentView('ride-neon-pro');
             }}
             className="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-orange-500/50 transition"
           >
-            Ouvrir l'interface NEON
+            Ouvrir l'interface NEON PRO
           </button>
         </div>
-      </div>
-    </div>
-  );
-
-  // Placeholder pour les modules en développement
-  const PlaceholderModule = ({ title, description }) => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-6">
-      <div className="text-center max-w-2xl">
-        <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-green-500/50">
-          <Zap className="h-12 w-12 text-white" />
-        </div>
-        <h2 className="text-3xl font-bold text-white mb-4">{title}</h2>
-        <p className="text-slate-400 mb-6">{description}</p>
-        <p className="text-green-400 text-sm mb-8">Module en développement...</p>
-        <button
-          onClick={() => handleNavigation('home')}
-          className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
-        >
-          <Home className="h-5 w-5" />
-          Retour Accueil
-        </button>
       </div>
     </div>
   );
@@ -144,6 +129,113 @@ const App = () => {
     switch(currentView) {
       case 'home':
         return <HomePage onNavigate={handleNavigation} />;
+      
+      // 🆕 NOUVEAUX CASES - Système Unifié Tarifs
+      case 'test-tarifs':
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+            <nav className="sticky top-0 z-50 bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl">
+              <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="flex items-center gap-3 hover:opacity-80 transition"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <Award className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="text-xl font-bold text-white">Test Système</h1>
+                      <p className="text-xs text-slate-400">Vérification Types & Tarifs</p>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center gap-2"
+                  >
+                    <Home className="h-4 w-4" />
+                    Accueil
+                  </button>
+                </div>
+              </div>
+            </nav>
+            <TestSysteme />
+          </div>
+        );
+      
+      case 'exemples-tarifs':
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+            <nav className="sticky top-0 z-50 bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl">
+              <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="flex items-center gap-3 hover:opacity-80 transition"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <Sparkles className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="text-xl font-bold text-white">Exemples Tarifs</h1>
+                      <p className="text-xs text-slate-400">Guide d'utilisation</p>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center gap-2"
+                  >
+                    <Home className="h-4 w-4" />
+                    Accueil
+                  </button>
+                </div>
+              </div>
+            </nav>
+            <ExemplesUsage />
+          </div>
+        );
+      
+      // 🆕 NOUVEAU CASE - Cahier de Charge Recharge
+      case 'cahier-charge':
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+            <nav className="sticky top-0 z-50 bg-gradient-to-r from-slate-900/95 to-slate-800/95 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl">
+              <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="flex items-center gap-3 hover:opacity-80 transition"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <FileText className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="text-xl font-bold text-white">Cahier de Charge</h1>
+                      <p className="text-xs text-slate-400">Station Recharge Lomé</p>
+                    </div>
+                  </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => handleNavigation('recharge')}
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition flex items-center gap-2"
+                    >
+                      <Zap className="h-4 w-4" />
+                      Recharge
+                    </button>
+                    <button
+                      onClick={() => handleNavigation('home')}
+                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center gap-2"
+                    >
+                      <Home className="h-4 w-4" />
+                      Accueil
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </nav>
+            <CahierChargeRecharge onNavigate={handleNavigation} />
+          </div>
+        );
       
       case 'ride':
         return (
@@ -166,10 +258,10 @@ const App = () => {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => setShowNeonModal(true)}
-                      className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg transition flex items-center gap-2 hover:shadow-lg hover:shadow-orange-500/50"
+                      className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-600 text-white rounded-lg transition flex items-center gap-2 hover:shadow-lg hover:shadow-orange-500/50 animate-pulse"
                     >
                       <Radio className="h-4 w-4" />
-                      NEON
+                      NEON PRO
                     </button>
                     <button
                       onClick={() => handleNavigation('home')}
@@ -215,6 +307,46 @@ const App = () => {
               </div>
             </nav>
             <MakayaRideNeon />
+          </div>
+        );
+
+      case 'ride-neon-pro':
+        return (
+          <div className="min-h-screen" style={{ backgroundColor: '#0A0A14' }}>
+            <nav className="sticky top-0 z-50 border-b border-gray-800" style={{ backgroundColor: '#13131F' }}>
+              <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={() => handleNavigation('home')}
+                    className="flex items-center gap-3 hover:opacity-80 transition"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/50 animate-pulse">
+                      <Radio className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="text-xl font-bold" style={{ color: '#FF6B35' }}>Makaya Ride NEON PRO</h1>
+                      <p className="text-xs text-slate-400">Interface Premium Style Uber</p>
+                    </div>
+                  </button>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => handleNavigation('ride')}
+                      className="px-4 py-2 text-slate-400 hover:text-white rounded-lg transition flex items-center gap-2"
+                    >
+                      Version Standard
+                    </button>
+                    <button
+                      onClick={() => handleNavigation('home')}
+                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition flex items-center gap-2"
+                    >
+                      <Home className="h-4 w-4" />
+                      Accueil
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </nav>
+            <MakayaRideNeonPro />
           </div>
         );
       
@@ -278,7 +410,7 @@ const App = () => {
                 </div>
               </div>
             </nav>
-            <MakayaRecharge />
+            <MakayaRecharge onNavigate={handleNavigation} />
           </div>
         );
       
