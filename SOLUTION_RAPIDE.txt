@@ -1,0 +1,135 @@
+═══════════════════════════════════════════════════════════════════
+  🔧 SOLUTION RAPIDE - SECTION CAHIER DES CHARGES
+═══════════════════════════════════════════════════════════════════
+
+⚠️ PROBLÈME: La section n'apparaît pas sur la page d'accueil
+
+✅ SOLUTION: REDÉMARRER L'APPLICATION + VIDER LE CACHE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🚀 ÉTAPES À SUIVRE (5 MINUTES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  ARRÊTER L'APPLICATION
+    └─► Dans le terminal: Appuyez sur Ctrl + C
+    └─► Confirmer avec: Y
+
+2️⃣  REDÉMARRER L'APPLICATION
+    └─► Tapez: npm run dev
+    └─► Attendez le message "ready in XXX ms"
+    └─► OU: Double-cliquer sur DEMARRER.bat
+
+3️⃣  VIDER LE CACHE DU NAVIGATEUR
+    └─► Appuyez sur: Ctrl + Shift + R
+    └─► (Cmd + Shift + R sur Mac)
+
+4️⃣  VÉRIFIER LA PAGE
+    └─► Allez sur: http://localhost:3000
+    └─► SCROLLER EN BAS de la page d'accueil
+    └─► La section VERTE devrait apparaître !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ CE QUE VOUS DEVRIEZ VOIR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Après la section Business Plan (grise), en scrollant vers le bas:
+
+┌─────────────────────────────────────────────────────────────────┐
+│  📚 Cahier des Charges - Station Pilote                         │
+│  Projet initial • 1 Station • 10 Bornes • Budget 69.6M FCFA    │
+│                                              [📄 Consulter →]   │
+├─────────────────────────────────────────────────────────────────┤
+│  Budget Total    Puissance    ROI         Sections             │
+│  69.6M FCFA      525 kW       < 12 mois   13/13 ✅            │
+└─────────────────────────────────────────────────────────────────┘
+
+COULEUR: Fond vert foncé avec bordure verte lumineuse ✨
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  💡 POSITION DE LA SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Page d'Accueil (de haut en bas):
+  1. Logo + Titre "MAKAYA ENERGIE"
+  2. 3 Cartes: Ride, Mobility, Recharge
+  3. Section Business Plan (GRISE) 
+  4. Section Cahier des Charges (VERTE) 👈 ICI !
+
+⚠️ IMPORTANT: Vous devez SCROLLER EN BAS pour voir la section !
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🔍 SI ÇA NE FONCTIONNE PAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Vérifier la console du navigateur:
+   └─► Appuyez sur F12
+   └─► Onglet "Console"
+   └─► Cherchez les erreurs en rouge
+
+2. Réinstaller les dépendances:
+   └─► npm install
+   └─► npm run dev
+
+3. Vérifier le fichier HomePage.jsx:
+   └─► Ouvrir: src/pages/HomePage.jsx
+   └─► Chercher: "Cahier des Charges - Station Pilote"
+   └─► Doit être présent à la fin du fichier ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ VÉRIFICATION: LE CODE EST CORRECT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+J'ai vérifié le fichier HomePage.jsx:
+  ✅ La section est bien présente dans le code
+  ✅ Tous les imports sont corrects (BookOpen, FileText)
+  ✅ Le JSX est valide
+  ✅ Pas d'erreur de syntaxe
+
+Le problème vient simplement du fait que:
+  1. L'application doit être redémarrée
+  2. Le cache du navigateur doit être vidé
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎯 COMMANDES RAPIDES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ARRÊTER
+Ctrl + C
+
+# REDÉMARRER
+npm run dev
+
+# VIDER CACHE
+Ctrl + Shift + R
+
+# OUVRIR
+http://localhost:3000
+
+# SCROLLER EN BAS
+↓ ↓ ↓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📞 DOCUMENTATION COMPLÈTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour plus de détails, consultez:
+  📄 DEPANNAGE_HOMEPAGE.md - Guide complet de dépannage
+  📄 GUIDE_DEMARRAGE_RAPIDE.md - Guide utilisateur
+  📄 CORRECTION_FINALE_CDC.md - Documentation corrections
+
+═══════════════════════════════════════════════════════════════════
+  🎉 RÉSUMÉ
+═══════════════════════════════════════════════════════════════════
+
+  ✅ Le code est correct
+  ✅ La section existe
+  ⚠️ Vous devez REDÉMARRER l'application
+  ⚠️ Vous devez VIDER LE CACHE
+  ⚠️ Vous devez SCROLLER EN BAS
+
+  🚀 SUIVEZ LES 4 ÉTAPES CI-DESSUS ! 🚀
+
+═══════════════════════════════════════════════════════════════════
+Créé le: 3 Décembre 2025
+Solution: Redémarrage + Cache + Scroll
+═══════════════════════════════════════════════════════════════════

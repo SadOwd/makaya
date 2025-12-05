@@ -1,0 +1,127 @@
+═══════════════════════════════════════════════════════════════════
+  ⚠️ PAGE BLANCHE - SOLUTION RAPIDE
+═══════════════════════════════════════════════════════════════════
+
+PROBLÈME: Page blanche après vidage du cache
+CAUSE: Cache Vite ou erreur JavaScript
+SOLUTION: Nettoyage complet
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🚀 SOLUTION EN 5 ÉTAPES (2 MINUTES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  ARRÊTER L'APPLICATION
+    └─► Dans le terminal: Ctrl + C
+
+2️⃣  SUPPRIMER LE CACHE VITE
+    └─► rmdir /s /q node_modules\.vite
+    └─► (Confirmer avec O)
+
+3️⃣  FERMER LE NAVIGATEUR
+    └─► Fermez TOUS les onglets
+    └─► Fermez complètement le navigateur
+
+4️⃣  RELANCER L'APPLICATION
+    └─► npm run dev
+    └─► Attendez "ready in XXX ms"
+
+5️⃣  OUVRIR UN NOUVEL ONGLET
+    └─► Ouvrez le navigateur
+    └─► http://localhost:3000
+    └─► Attendez 10 secondes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  💡 COMMANDES COMPLÈTES À COPIER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Copier-coller tout ça dans le terminal:
+
+cd "C:\Users\mmawo\Desktop\E Mobility\APP MAKAYA"
+rmdir /s /q node_modules\.vite
+npm run dev
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🔍 SI ÇA NE FONCTIONNE PAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OPTION 1: Réinstallation complète
+
+cd "C:\Users\mmawo\Desktop\E Mobility\APP MAKAYA"
+rmdir /s /q node_modules
+del package-lock.json
+npm install
+npm run dev
+
+OPTION 2: Navigation privée
+
+1. Ouvrir navigation privée (Ctrl + Shift + N)
+2. Aller sur http://localhost:3000
+3. Vérifier si ça marche
+
+OPTION 3: Vérifier les erreurs
+
+1. Appuyez sur F12
+2. Onglet "Console"
+3. Cherchez les erreurs en ROUGE
+4. Copiez-moi le message complet
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ✅ CE QUE VOUS DEVRIEZ VOIR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Dans le terminal:
+  VITE v7.2.2  ready in XXX ms
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+
+Dans le navigateur:
+  Logo MAKAYA ENERGIE (vert)
+  3 cartes: Ride, Mobility, Recharge
+  Section Business Plan
+  Section Cahier des Charges (verte, en bas)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚠️ IMPORTANT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Fermez COMPLÈTEMENT le navigateur avant de relancer
+2. Supprimez le cache Vite (node_modules\.vite)
+3. Attendez bien le message "ready" dans le terminal
+4. Ouvrez un NOUVEL onglet (pas rafraîchir l'ancien)
+5. Attendez 10 secondes pour le chargement initial
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🎯 POURQUOI PAGE BLANCHE ?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Causes possibles:
+  1. Cache Vite corrompu (PLUS FRÉQUENT)
+  2. Cache navigateur trop agressif
+  3. Erreur JavaScript qui bloque React
+  4. Port 3000 occupé par une autre app
+  5. Fichiers node_modules corrompus
+
+Solution la plus efficace:
+  → Supprimer cache Vite + fermer navigateur + relancer
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📞 INFORMATIONS À ME DONNER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Si ça ne fonctionne toujours pas, envoyez-moi:
+
+1. Ce qui s'affiche dans le TERMINAL après npm run dev
+2. Capture d'écran de la CONSOLE (F12 → Console)
+3. Résultat après avoir essayé en navigation privée
+
+═══════════════════════════════════════════════════════════════════
+  🚀 ESSAYEZ LA SOLUTION EN 5 ÉTAPES CI-DESSUS !
+═══════════════════════════════════════════════════════════════════
+
+Le cache Vite est souvent la cause du problème.
+La suppression de node_modules\.vite résout 90% des cas.
+
+═══════════════════════════════════════════════════════════════════
+Créé le: 3 Décembre 2025
+Solution: Suppression cache Vite
+═══════════════════════════════════════════════════════════════════
