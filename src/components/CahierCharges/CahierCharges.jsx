@@ -1,425 +1,294 @@
 import React, { useState } from 'react';
-import { 
-  presentationData,
-  budgetData,
-  modeleEconomiqueData,
-  formaterMontant,
-  calculerROI
-} from '../../../cahier-charges/data/index.js';
+import { BookOpen, Zap, Battery, BarChart, TrendingUp, DollarSign, Calendar, Award, Settings, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function CahierCharges() {
-  const [sectionActive, setSectionActive] = useState('resume');
-  
-  // Calculs
-  const budgetTotal = budgetData.recapitulatif.totalInvestissementFCFA;
-  const revenus = modeleEconomiqueData.hypothesesExploitation.revenus.an1.totalFCFA;
-  const resultat = modeleEconomiqueData.hypothesesExploitation.resultat.an1.resultatNetFCFA;
-  const roi = calculerROI(budgetTotal, resultat);
-  
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* En-tête */}
-      <header className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 shadow-lg">
-        <div className="container mx-auto">
-          <h1 className="text-4xl font-bold mb-2">
-            {presentationData.contexte.nomProjet}
-          </h1>
-          <p className="text-xl opacity-90">
-            Cahier des Charges - Station Pilote - Version 3.0
-          </p>
+  const [activeTab, setActiveTab] = useState('resume');
+
+  const tabs = [
+    { id: 'resume', label: 'Vue d\'ensemble', icon: Sparkles },
+    { id: 'hyc50', label: 'HYC50', icon: Zap },
+    { id: 'hyc200', label: 'HYC200', icon: Battery },
+    { id: 'comparatif', label: 'Comparatif', icon: BarChart },
+    { id: 'economique', label: 'Financier', icon: TrendingUp }
+  ];
+
+  const ProgressBar = ({ label, value, max, color, unit = '' }) => {
+    const pct = (value / max) * 100;
+    return (
+      <div className="mb-5">
+        <div className="flex justify-between text-sm mb-2">
+          <span className="font-semibold text-gray-700">{label}</span>
+          <span className="font-bold text-gray-900">{value}{unit}</span>
         </div>
-      </header>
-      
-      {/* Bandeau Information - Station Pilote */}
-      <div className="container mx-auto px-6 py-6">
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg shadow-md">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-4 flex-1">
-              <div className="text-3xl flex-shrink-0">ℹ️</div>
-              <div className="flex-1">
-                <h4 className="font-bold text-blue-900 text-lg mb-2">
-                  📋 Station Pilote - Projet Initial
-                </h4>
-                <p className="text-sm text-blue-800 mb-3 leading-relaxed">
-                  Ce cahier des charges décrit le <strong>projet initial d'une station pilote</strong> de 10 bornes 
-                  (budget 69,6M FCFA). Il s'agit de la phase 1 du déploiement.
-                </p>
-                <div className="bg-white rounded-lg p-4 mb-3">
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="font-semibold text-gray-700 mb-2">📍 Station Pilote (Ce document):</p>
-                      <ul className="space-y-1 text-gray-600">
-                        <li>• 1 station</li>
-                        <li>• 10 bornes (5 AC + 3 DC 60kW + 2 DC 120kW)</li>
-                        <li>• Budget: 69,6M FCFA</li>
-                        <li>• Puissance: 525 kW</li>
-                      </ul>
+        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-inner">
+          <div className={`h-4 rounded-full ${color} transition-all duration-1000`} style={{ width: `${pct}%` }}></div>
+        </div>
+        <div className="text-xs text-gray-500 mt-1">{Math.round(pct)}%</div>
+      </div>
+    );
+  };
+
+  const StatCard = ({ icon: Icon, value, label, badge, gradient }) => (
+    <div className={`bg-gradient-to-br ${gradient} text-white rounded-2xl shadow-2xl p-6 transform hover:scale-105 transition-all`}>
+      <Icon className="w-12 h-12 mb-3 opacity-80" />
+      <div className="text-5xl font-black mb-2">{value}</div>
+      <div className="text-sm opacity-90 mb-3">{label}</div>
+      <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold inline-block">{badge}</div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+      {/* Header */}
+      <div className="relative bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-700 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-20"></div>
+        <div className="container mx-auto px-6 py-16 relative z-10">
+          <div className="flex items-center justify-between flex-wrap gap-6">
+            <div className="flex-1">
+              <div className="flex items-center gap-5 mb-6">
+                <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-2xl">
+                  <BookOpen className="w-10 h-10 animate-pulse" />
+                </div>
+                <div>
+                  <h1 className="text-5xl font-black mb-2">Cahier des Charges</h1>
+                  <p className="text-2xl opacity-90">Station Pilote E-Mobility • Configuration Alpitronic</p>
+                </div>
+              </div>
+              <div className="flex gap-4 flex-wrap">
+                <span className="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full font-semibold shadow-lg">📄 Version 2.0</span>
+                <span className="bg-emerald-500/40 backdrop-blur-md px-5 py-2 rounded-full font-semibold shadow-lg">✓ Validé</span>
+                <span className="bg-blue-500/40 backdrop-blur-md px-5 py-2 rounded-full font-semibold shadow-lg">📅 Décembre 2025</span>
+              </div>
+            </div>
+            <div className="text-right bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/30 shadow-2xl">
+              <div className="text-6xl font-black mb-3">163M</div>
+              <div className="text-xl opacity-90 mb-3">FCFA Budget</div>
+              <div className="bg-emerald-400/30 backdrop-blur-sm px-5 py-2 rounded-xl text-lg font-bold">↘ -21% vs ABB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="bg-white/80 backdrop-blur-lg border-b sticky top-0 z-40 shadow-lg">
+        <div className="container mx-auto px-6">
+          <div className="flex gap-2 overflow-x-auto">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-3 px-8 py-5 border-b-4 transition-all font-semibold ${
+                    activeTab === tab.id ? 'border-emerald-500 text-emerald-600 bg-emerald-50/50' : 'border-transparent text-gray-600 hover:bg-gray-50'
+                  }`}>
+                  <Icon className="w-5 h-5" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-6 py-12 max-w-7xl">
+        {activeTab === 'resume' && (
+          <div className="space-y-8">
+            <div className="grid md:grid-cols-4 gap-6">
+              <StatCard icon={DollarSign} value="163M" label="Budget FCFA" badge="↘ -21% vs ABB" gradient="from-emerald-500 to-emerald-600" />
+              <StatCard icon={Zap} value="350 kW" label="9 points charge" badge="↗ +12% capacité" gradient="from-blue-500 to-blue-600" />
+              <StatCard icon={TrendingUp} value="48%" label="ROIC An 5" badge="↗ +20 pts vs ABB" gradient="from-purple-500 to-purple-600" />
+              <StatCard icon={Calendar} value="5-6 ans" label="Payback" badge="↘ -2 ans vs ABB" gradient="from-orange-500 to-orange-600" />
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-2xl p-8">
+              <h3 className="text-3xl font-bold mb-6">Configuration Station</h3>
+              <div className="grid md:grid-cols-2 gap-10 mb-8">
+                <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6">
+                  <h4 className="font-bold text-xl mb-6">Répartition Puissance (350 kW)</h4>
+                  <ProgressBar label="3× HYC50" value={150} max={350} color="bg-gradient-to-r from-emerald-500 to-emerald-600" unit=" kW" />
+                  <ProgressBar label="1× HYC200" value={200} max={350} color="bg-gradient-to-r from-blue-500 to-blue-600" unit=" kW" />
+                </div>
+                <div className="bg-gradient-to-br from-gray-50 to-purple-50 rounded-xl p-6">
+                  <h4 className="font-bold text-xl mb-6">Répartition CAPEX (163M)</h4>
+                  <ProgressBar label="3× HYC50" value={43.5} max={163} color="bg-gradient-to-r from-emerald-400 to-emerald-500" unit="M" />
+                  <ProgressBar label="1× HYC200" value={39} max={163} color="bg-gradient-to-r from-blue-400 to-blue-500" unit="M" />
+                  <ProgressBar label="Infrastructure" value={45} max={163} color="bg-gradient-to-r from-purple-400 to-purple-500" unit="M" />
+                  <ProgressBar label="Génie Civil" value={35.5} max={163} color="bg-gradient-to-r from-orange-400 to-orange-500" unit="M" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {title:'3× HYC50',desc:'Bornes murales 50 kW',points:['6 points simultanés','50 kW ou 2×25 kW','Efficacité 97%','<50 dBA'],price:'14,5M',color:'emerald'},
+                  {title:'1× HYC200',desc:'Borne sol modulaire',points:['3 points ultra-rapide','200 kW modulaire','Efficacité 97,5%','V2G Ready'],price:'39M',color:'blue'}
+                ].map((eq,i)=>(
+                  <div key={i} className={`bg-gradient-to-br from-${eq.color}-50 to-${eq.color}-100 rounded-2xl p-8 border-2 border-${eq.color}-300 shadow-xl`}>
+                    <h4 className={`text-2xl font-black text-${eq.color}-900 mb-2`}>{eq.title}</h4>
+                    <p className={`text-${eq.color}-700 font-semibold mb-4`}>{eq.desc}</p>
+                    <div className="bg-white rounded-xl p-4 mb-4">
+                      {eq.points.map((p,j)=>(
+                        <div key={j} className="flex items-center gap-2 mb-2">
+                          <ChevronRight className={`w-4 h-4 text-${eq.color}-500`} />
+                          <span className="text-sm">{p}</span>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <p className="font-semibold text-green-700 mb-2">⚡ Réseau Actuel (Makaya Recharge):</p>
-                      <ul className="space-y-1 text-gray-600">
-                        <li>• <strong>6 stations</strong> actives</li>
-                        <li>• <strong>24 bornes</strong> (22 actives)</li>
-                        <li>• CA: <strong>7,37M FCFA/mois</strong></li>
-                        <li>• Utilisation: <strong>78,5%</strong></li>
-                      </ul>
+                    <div className={`bg-${eq.color}-600 text-white rounded-xl p-5 text-center`}>
+                      <div className="text-3xl font-black">{eq.price} FCFA</div>
+                      <div className="text-sm opacity-90">prix total</div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-emerald-50 via-blue-50 to-purple-50 rounded-2xl p-10 shadow-2xl">
+              <h3 className="text-3xl font-bold mb-8 flex items-center gap-3">
+                <Award className="w-8 h-8 text-emerald-600" />
+                Avantages Alpitronic
+              </h3>
+              <div className="grid md:grid-cols-4 gap-5">
+                {[
+                  {emoji:'🏆',title:'Leader Européen',desc:'30%+ parts marché DC'},
+                  {emoji:'⚡',title:'Efficacité 97,5%',desc:'Meilleure du marché'},
+                  {emoji:'🔧',title:'Modulaire',desc:'Power-Stack 50 kW'},
+                  {emoji:'🇪🇺',title:'Made in Europe',desc:'Qualité italienne'},
+                  {emoji:'🔋',title:'V2G Ready',desc:'Bidirectionnel'},
+                  {emoji:'🧠',title:'Smart Balancing',desc:'Optimisation auto'},
+                  {emoji:'🔇',title:'Silencieux',desc:'<50 dB'},
+                  {emoji:'💰',title:'Prix optimal',desc:'-20 à -40% vs ABB'}
+                ].map((av,i)=>(
+                  <div key={i} className="bg-white rounded-xl p-5 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2">
+                    <div className="text-4xl mb-3">{av.emoji}</div>
+                    <h4 className="font-bold text-sm mb-2">{av.title}</h4>
+                    <p className="text-xs text-gray-600">{av.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'hyc50' && (
+          <div className="space-y-8">
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-2xl p-10 shadow-2xl">
+              <h2 className="text-5xl font-black mb-3">Alpitronic HYC50</h2>
+              <p className="text-2xl opacity-90">Borne Murale DC 50 kW</p>
+            </div>
+            <div className="grid md:grid-cols-4 gap-5">
+              {[{v:'97%',l:'Efficacité'},{v:'0.99',l:'Facteur Puissance'},{v:'25W',l:'Veille'},{v:'<5%',l:'THDi'}].map((st,i)=>(
+                <div key={i} className="bg-white rounded-xl p-6 shadow-lg text-center">
+                  <div className="text-4xl font-black text-emerald-600 mb-2">{st.v}</div>
+                  <div className="text-sm font-bold">{st.l}</div>
                 </div>
-                <p className="text-xs text-blue-700">
-                  👉 Pour consulter les données du réseau complet en opération, voir le module <strong>Makaya Recharge</strong>.
-                </p>
-              </div>
+              ))}
             </div>
-            <a
-              href="#recharge"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2 whitespace-nowrap text-sm font-semibold flex-shrink-0"
-            >
-              Voir Réseau Complet →
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      {/* Résumé Exécutif */}
-      <section className="container mx-auto p-6">
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">Résumé Exécutif</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-              <div className="text-sm text-gray-600 mb-1">Budget Total</div>
-              <div className="text-2xl font-bold text-blue-600">
-                {formaterMontant(budgetTotal, 'FCFA')}
+            <div className="bg-white rounded-2xl shadow-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6">Spécifications</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-bold mb-4">Sortie</h4>
+                  {[{l:'Puissance',v:'50 kW'},{l:'Interface',v:'CCS2, CHAdeMO'},{l:'Tension',v:'150-1000 Vdc'}].map((s,i)=>(
+                    <div key={i} className="flex justify-between p-3 bg-gray-50 rounded-lg mb-2">
+                      <span className="font-semibold text-sm">{s.l}</span>
+                      <span className="font-bold">{s.v}</span>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <h4 className="font-bold mb-4">Entrée</h4>
+                  {[{l:'Tension AC',v:'400 V'},{l:'Courant',v:'90 A'},{l:'Fréquence',v:'50/60 Hz'}].map((s,i)=>(
+                    <div key={i} className="flex justify-between p-3 bg-gray-50 rounded-lg mb-2">
+                      <span className="font-semibold text-sm">{s.l}</span>
+                      <span className="font-bold">{s.v}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {formaterMontant(Math.round(budgetTotal / 600), 'USD')}
-              </div>
-            </div>
-            <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-              <div className="text-sm text-gray-600 mb-1">Revenus An 1</div>
-              <div className="text-2xl font-bold text-green-600">
-                {formaterMontant(revenus, 'FCFA')}
-              </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {formaterMontant(Math.round(revenus / 600), 'USD')}
-              </div>
-            </div>
-            <div className="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
-              <div className="text-sm text-gray-600 mb-1">Résultat Net An 1</div>
-              <div className="text-2xl font-bold text-purple-600">
-                {formaterMontant(resultat, 'FCFA')}
-              </div>
-              <div className="text-xs text-gray-500 mt-1">Marge : 48%</div>
-            </div>
-            <div className="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500">
-              <div className="text-sm text-gray-600 mb-1">ROI</div>
-              <div className="text-2xl font-bold text-orange-600">
-                {roi.formatee}
-              </div>
-              <div className="text-xs text-gray-500 mt-1">TRI : 180-200%</div>
             </div>
           </div>
-        </div>
-        
-        {/* Navigation */}
-        <nav className="bg-white rounded-lg shadow-lg p-4 mb-6">
-          <div className="flex flex-wrap gap-2">
-            {[
-              { id: 'resume', label: '📊 Résumé' },
-              { id: 'specifications', label: '⚡ Spécifications' },
-              { id: 'budget', label: '💰 Budget' },
-              { id: 'economique', label: '📈 Économique' },
-              { id: 'planning', label: '📅 Planning' }
-            ].map(section => (
-              <button
-                key={section.id}
-                onClick={() => setSectionActive(section.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  sectionActive === section.id
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {section.label}
-              </button>
-            ))}
-          </div>
-        </nav>
-        
-        {/* Contenu */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          {sectionActive === 'resume' && <SectionResume />}
-          {sectionActive === 'specifications' && <SectionSpecifications />}
-          {sectionActive === 'budget' && <SectionBudget />}
-          {sectionActive === 'economique' && <SectionEconomique />}
-          {sectionActive === 'planning' && <SectionPlanning />}
-        </div>
-      </section>
-    </div>
-  );
-}
+        )}
 
-// Composants de sections
-function SectionResume() {
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Résumé du Projet</h2>
-      <div className="prose max-w-none">
-        <p className="text-lg text-gray-700">
-          {presentationData.contexte.justification}
-        </p>
-        <h3 className="text-xl font-bold mt-6 mb-3">Objectifs Principaux</h3>
-        <ul className="space-y-2">
-          {presentationData.objectifs.principaux.map((obj, i) => (
-            <li key={i} className="flex items-start">
-              <span className="text-green-600 mr-2">✓</span>
-              <span>{obj}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function SectionSpecifications() {
-  const { specificationsData } = require('../../../cahier-charges/data/index.js');
-  
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Spécifications Techniques</h2>
-      <div className="space-y-6">
-        {/* Configuration */}
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="font-bold mb-2">Configuration Générale</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div>
-              <span className="text-gray-600">Total bornes :</span>
-              <span className="font-bold ml-2">10</span>
+        {activeTab === 'hyc200' && (
+          <div className="space-y-8">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-2xl p-10 shadow-2xl">
+              <h2 className="text-5xl font-black mb-3">Alpitronic HYC200</h2>
+              <p className="text-2xl opacity-90">Borne Sol 100-200 kW - Power-Stack</p>
             </div>
-            <div>
-              <span className="text-gray-600">Puissance :</span>
-              <span className="font-bold ml-2">525 kW</span>
-            </div>
-            <div>
-              <span className="text-gray-600">CEET :</span>
-              <span className="font-bold ml-2">400 kW</span>
-            </div>
-            <div>
-              <span className="text-gray-600">Load Balancing :</span>
-              <span className="font-bold ml-2 text-green-600">✓</span>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bornes AC */}
-        <div className="border rounded-lg p-4">
-          <h3 className="text-lg font-bold mb-3 text-blue-600">
-            Bornes AC 21kW (5 unités)
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <p><strong>Puissance :</strong> 21 kW</p>
-              <p><strong>Efficacité :</strong> ≥ 95%</p>
-              <p><strong>Connecteur :</strong> Type 2</p>
-            </div>
-            <div>
-              <p><strong>Temps charge 50kWh :</strong> 2h30</p>
-              <p><strong>Prix :</strong> 281 400 FCFA/unité</p>
-              <p><strong>Total :</strong> 1 407 000 FCFA</p>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bornes DC 60kW */}
-        <div className="border rounded-lg p-4">
-          <h3 className="text-lg font-bold mb-3 text-green-600">
-            Bornes DC 60kW (3 unités)
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <p><strong>Puissance :</strong> 60 kW</p>
-              <p><strong>Efficacité :</strong> ≥ 94.5%</p>
-              <p><strong>Connecteur :</strong> CCS2</p>
-            </div>
-            <div>
-              <p><strong>Temps charge 50kWh :</strong> 48 min (0-80%)</p>
-              <p><strong>Prix :</strong> 2 500 800 FCFA/unité</p>
-              <p><strong>Total :</strong> 7 502 400 FCFA</p>
-            </div>
-          </div>
-        </div>
-        
-        {/* Bornes DC 120kW */}
-        <div className="border rounded-lg p-4">
-          <h3 className="text-lg font-bold mb-3 text-purple-600">
-            Bornes DC 120kW (2 unités)
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <p><strong>Puissance :</strong> 120 kW</p>
-              <p><strong>Efficacité :</strong> ≥ 94.5%</p>
-              <p><strong>Connecteur :</strong> CCS2</p>
-            </div>
-            <div>
-              <p><strong>Temps charge 50kWh :</strong> 24 min (0-80%)</p>
-              <p><strong>Prix :</strong> 3 623 400 FCFA/unité</p>
-              <p><strong>Total :</strong> 7 246 800 FCFA</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SectionBudget() {
-  const budget = budgetData.recapitulatif;
-  
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Budget Détaillé</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-3 text-left">Poste</th>
-              <th className="border p-3 text-right">FCFA</th>
-              <th className="border p-3 text-right">USD</th>
-              <th className="border p-3 text-right">%</th>
-            </tr>
-          </thead>
-          <tbody>
-            {budget.repartition.map((item, i) => (
-              <tr key={i} className="hover:bg-gray-50">
-                <td className="border p-3">{item.poste}</td>
-                <td className="border p-3 text-right font-mono">
-                  {formaterMontant(item.fcfa, 'FCFA')}
-                </td>
-                <td className="border p-3 text-right font-mono">
-                  {formaterMontant(item.usd, 'USD')}
-                </td>
-                <td className="border p-3 text-right">{item.pourcentage}%</td>
-              </tr>
-            ))}
-            <tr className="bg-blue-100 font-bold">
-              <td className="border p-3">TOTAL HT</td>
-              <td className="border p-3 text-right font-mono">
-                {formaterMontant(budget.totalInvestissementFCFA, 'FCFA')}
-              </td>
-              <td className="border p-3 text-right font-mono">
-                {formaterMontant(budget.totalInvestissementUSD, 'USD')}
-              </td>
-              <td className="border p-3 text-right">100%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-function SectionEconomique() {
-  const { strategieTarifaire } = modeleEconomiqueData;
-  
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Modèle Économique</h2>
-      
-      <div className="space-y-6">
-        {/* Tarification */}
-        <div>
-          <h3 className="text-xl font-bold mb-3">Tarification</h3>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">AC 21kW</h4>
-              <p className="text-2xl font-bold text-blue-600">
-                {strategieTarifaire.tarificationAC.fcfa} FCFA/kWh
-              </p>
-              <p className="text-sm text-gray-600">
-                {strategieTarifaire.tarificationAC.usd} USD/kWh
-              </p>
-            </div>
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">DC 60kW</h4>
-              <p className="text-2xl font-bold text-green-600">
-                {strategieTarifaire.tarificationDC60.fcfa} FCFA/kWh
-              </p>
-              <p className="text-sm text-gray-600">
-                {strategieTarifaire.tarificationDC60.usd} USD/kWh
-              </p>
-            </div>
-            <div className="bg-purple-50 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">DC 120kW</h4>
-              <p className="text-2xl font-bold text-purple-600">
-                {strategieTarifaire.tarificationDC120.fcfa} FCFA/kWh
-              </p>
-              <p className="text-sm text-gray-600">
-                {strategieTarifaire.tarificationDC120.usd} USD/kWh
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        {/* Rentabilité */}
-        <div>
-          <h3 className="text-xl font-bold mb-3">Rentabilité</h3>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <p className="text-sm text-gray-600">ROI</p>
-                <p className="text-xl font-bold text-green-600">12 mois</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">TRI</p>
-                <p className="text-xl font-bold text-green-600">180-200%</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Marge Nette</p>
-                <p className="text-xl font-bold text-green-600">48%</p>
+            <div className="bg-white rounded-2xl shadow-2xl p-8">
+              <h3 className="text-2xl font-bold mb-6">Power-Stack Modulaire</h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                {[{p:'100 kW',s:'1× Stack'},{p:'200 kW',s:'2× Stack',f:true},{p:'150 kW',s:'1,5× Stack'}].map((c,i)=>(
+                  <div key={i} className={`bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 ${c.f?'border-4 border-blue-500':''}`}>
+                    <div className="text-4xl font-black text-blue-600 mb-2">{c.p}</div>
+                    <div className="text-sm font-semibold">{c.s}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+        )}
 
-function SectionPlanning() {
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Planning du Projet</h2>
-      <div className="space-y-4">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="font-bold mb-2">Durée Totale</h3>
-          <p className="text-xl font-bold text-blue-600">28 semaines (7 mois)</p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="border rounded-lg p-4">
-            <h4 className="font-bold mb-2">Phase 0 : Études</h4>
-            <p className="text-lg font-bold text-purple-600 mb-2">12 semaines</p>
-            <ul className="text-sm space-y-1">
-              <li>• Études techniques</li>
-              <li>• Conception et plans</li>
-              <li>• Autorisations</li>
-              <li>• Consultation entreprises</li>
-            </ul>
+        {activeTab === 'comparatif' && (
+          <div className="space-y-8">
+            <div className="bg-white rounded-2xl shadow-2xl p-10">
+              <h3 className="text-3xl font-bold mb-8">Comparaison Alpitronic vs ABB</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2">
+                      <th className="text-left py-4 px-6 font-bold">Critère</th>
+                      <th className="text-left py-4 px-6 font-bold text-emerald-600">Alpitronic</th>
+                      <th className="text-left py-4 px-6 font-bold">ABB</th>
+                      <th className="text-left py-4 px-6 font-bold text-emerald-600">Avantage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['CAPEX','163 M','206 M','-21%'],
+                      ['Points','9','8','+12%'],
+                      ['Efficacité','97,5%','96,5%','+1%'],
+                      ['ROIC An 5','48%','28%','+20 pts'],
+                      ['Payback','5-6 ans','7-8 ans','-2 ans']
+                    ].map((r,i)=>(
+                      <tr key={i} className="border-b hover:bg-emerald-50">
+                        <td className="py-4 px-6 font-semibold">{r[0]}</td>
+                        <td className="py-4 px-6 text-emerald-600 font-bold">{r[1]}</td>
+                        <td className="py-4 px-6">{r[2]}</td>
+                        <td className="py-4 px-6 text-emerald-600 font-bold">{r[3]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          
-          <div className="border rounded-lg p-4">
-            <h4 className="font-bold mb-2">Phase 1 : Travaux</h4>
-            <p className="text-lg font-bold text-green-600 mb-2">16 semaines</p>
-            <ul className="text-sm space-y-1">
-              <li>• Terrassement et fondations</li>
-              <li>• Voirie et réseaux</li>
-              <li>• Installation électrique</li>
-              <li>• Installation bornes</li>
-              <li>• Tests et mise en service</li>
-            </ul>
+        )}
+
+        {activeTab === 'economique' && (
+          <div className="space-y-8">
+            <div className="bg-white rounded-2xl shadow-2xl p-10">
+              <h3 className="text-3xl font-bold mb-8">Projections 5 Ans</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {[
+                  {an:1,s:14,r:40.9,e:-12.8,m:-31.2},
+                  {an:3,s:40,r:116.0,e:30.5,m:26.3},
+                  {an:5,s:69,r:198.5,e:78.1,m:39.3}
+                ].map((d)=>(
+                  <div key={d.an} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6">
+                    <h4 className="font-black text-2xl mb-5">Année {d.an}</h4>
+                    <div className="space-y-3">
+                      <div className="flex justify-between p-3 bg-white rounded"><span className="text-sm">Sessions/j</span><span className="font-bold">{d.s}</span></div>
+                      <div className="flex justify-between p-3 bg-white rounded"><span className="text-sm">Revenus</span><span className="font-bold">{d.r}M</span></div>
+                      <div className="flex justify-between p-3 bg-white rounded"><span className="text-sm">EBITDA</span><span className={`font-bold ${d.e>0?'text-emerald-600':'text-red-600'}`}>{d.e}M</span></div>
+                      <div className="flex justify-between p-3 bg-white rounded"><span className="text-sm">Marge</span><span className={`font-bold ${d.m>0?'text-emerald-600':'text-red-600'}`}>{d.m}%</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
